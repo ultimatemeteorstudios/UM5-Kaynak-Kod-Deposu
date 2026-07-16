@@ -1,0 +1,4020 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Meteor 5 - Açık Kaynak Deposu - UMOSP</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent !important;
+            -webkit-focus-ring-color: transparent !important;
+            outline: none !important;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: linear-gradient(to bottom right, #4a4200, #000000);
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            padding: 2.5rem;
+            max-width: 850px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 221, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 221, 0, 0.4);
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            color: #ffdd00;
+            text-shadow: 0 0 20px #ffcc00;
+            margin-bottom: 0.2rem;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: #fff2b8;
+            margin-bottom: 2rem;
+            font-weight: normal;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            color: white;
+            border: none;
+            padding: 1.1rem 2.2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            min-width: 240px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            user-select: none;
+        }
+
+        .btn-download {
+            background: linear-gradient(to bottom, #ffdd00, #997700);
+            box-shadow: 0 5px 15px rgba(255, 221, 0, 0.3);
+        }
+
+        .btn-upload {
+            background: linear-gradient(to bottom, #444, #222);
+            border: 1px solid #666;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(255, 221, 0, 0.5);
+            filter: brightness(1.2);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        #source-text {
+            width: 100%;
+            height: 300px;
+            padding: 15px;
+            border: 2px solid #ffdd00;
+            background-color: #1a1705;
+            color: #ffefbb;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.85rem;
+            resize: none;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            text-align: left;
+            overflow-y: auto;
+            line-height: 1.4;
+            -webkit-user-select: text !important;
+            -moz-user-select: text !important;
+            -ms-user-select: text !important;
+            user-select: text !important;
+        }
+
+        #source-text::-webkit-scrollbar { width: 8px; }
+        #source-text::-webkit-scrollbar-track { background: #000; }
+        #source-text::-webkit-scrollbar-thumb { background: #ffdd00; border-radius: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ULTIMATE METEOR 5</h1>
+        <h2>Açık Kaynak Deposu</h2>
+
+        <p>Aşağıda Ultimate Meteor 5 sürümünün tam kaynak kodunu görebilirsin. Projemiz her geçen gün daha da güçleniyor! Unutma lisansımız GNU GPL v3</p>
+
+        <textarea id="source-text" readonly><!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULTIMATE METEOR 5</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            margin: 0;
+            padding: 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        body {
+            background: #000;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            touch-action: none;
+            height: 100vh;
+            width: 100vw;
+            position: fixed;
+        }
+
+        #gameCanvas {
+            display: block;
+            background: #000;
+            margin: 0 auto;
+            touch-action: none;
+        }
+
+        #menu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(ellipse at center, rgba(0,30,90,0.9) 0%, rgba(0,0,0,0.95) 100%);
+            z-index: 100;
+            color: white;
+            text-align: center;
+            touch-action: pan-y;
+        }
+
+        .menu-title {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            color: #ffcc00;
+            text-shadow: 0 0 25px #cc9900, 0 0 35px #cc9900, 0 0 45px #cc9900;
+            background: linear-gradient(45deg, #ffcc00, #cc9900, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 0 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #ffe680;
+            text-shadow: 0 0 15px #ffcc00;
+            font-weight: bold;
+        }
+
+        .btn {
+            background: linear-gradient(to bottom, #ffcc00, #cc9900);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            margin: 0.6rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            min-width: 200px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.5);
+            touch-action: manipulation;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.8);
+        }
+
+        #controls {
+            position: absolute;
+            bottom: 2rem;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            touch-action: manipulation;
+            z-index: 60;
+        }
+
+        .control-btn {
+            background: rgba(255, 204, 0, 0.3);
+            color: white;
+            border: none;
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.1s;
+            border: 2px solid rgba(255, 204, 0, 0.6);
+            touch-action: manipulation;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .control-btn:active {
+            transform: scale(0.85);
+            background: rgba(255, 204, 0, 0.6);
+        }
+
+        #shootBtn {
+            background: rgba(0, 255, 111, 0.4);
+            border-color: rgba(0, 255, 111, 0.8);
+        }
+
+        #pauseBtn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 204, 0, 0.7);
+            color: white;
+            border: none;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            z-index: 50;
+            display: none;
+            font-weight: bold;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        /* DURAKLATMA MENÜSÜ */
+        #pauseMenu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(ellipse at center, rgba(0,25,50,0.92) 0%, rgba(0,0,0,0.96) 100%);
+            z-index: 150;
+            color: white;
+            text-align: center;
+            touch-action: pan-y;
+        }
+
+        .pause-menu-title {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #ffcc00;
+            text-shadow: 0 0 20px #cc9900, 0 0 30px #cc9900;
+            background: linear-gradient(45deg, #ffcc00, #cc9900, #ffcc00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+            letter-spacing: 2px;
+            padding: 0 1rem;
+        }
+
+        .pause-menu-show {
+            display: flex;
+            animation: pauseMenuIn 0.35s ease forwards;
+        }
+
+        .pause-menu-hide {
+            animation: pauseMenuOut 0.3s ease forwards;
+        }
+
+        @keyframes pauseMenuIn {
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pauseMenuOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.85); }
+        }
+
+        #homeBtnPause {
+            background: linear-gradient(to bottom, #fff59d, #40a0ff);
+            box-shadow: 0 0 15px rgba(255, 245, 157, 0.5);
+        }
+
+        #gameInfo {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            color: white;
+            font-size: 1.3rem;
+            z-index: 50;
+        }
+
+        #lives, #scoreDisplay, #goldDisplay, #powerDisplay {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 0.8rem 1.2rem;
+            border-radius: 15px;
+            border: 2px solid #ffcc00;
+            box-shadow: 0 0 10px rgba(255, 204, 0, 0.3);
+        }
+
+        #menuDiamondsDisplay, #diamondsDisplayShop {
+            color: #fff59d;
+            border-color: #fff59d !important;
+            box-shadow: 0 0 10px rgba(255, 245, 157, 0.4) !important;
+        }
+
+        .mode-btn {
+            background: rgba(255, 204, 0, 0.1);
+            border: 2px solid #ffcc00;
+            color: #ffcc00;
+            padding: 0.7rem 1rem;
+            margin: 0.2rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.8rem;
+            min-width: 90px;
+            touch-action: manipulation;
+        }
+
+        .mode-btn.active {
+            background: #ffcc00;
+            color: black;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.7);
+            font-weight: bold;
+        }
+
+        .mode-btn:active {
+            transform: scale(0.95);
+        }
+
+        #mode-container {
+            display: flex;
+            margin: 0.5rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 90%;
+            gap: 0.3rem;
+        }
+
+        #language-btn {
+            background: transparent;
+            border: 2px solid #ffcc00;
+            color: #ffcc00;
+            margin-top: 0.5rem;
+        }
+
+        /* MODE SELECTION */
+        .mode-btn.easy {
+            border-color: #fff176;
+            color: #fff176;
+        }
+        .mode-btn.easy.active {
+            background: #fff176;
+            color: black;
+            box-shadow: 0 0 20px rgba(152, 251, 152, 0.7);
+        }
+
+        .mode-btn.normal {
+            border-color: #e6d38a;
+            color: #e6d38a;
+        }
+        .mode-btn.normal.active {
+            background: #e6d38a;
+            color: black;
+            box-shadow: 0 0 20px rgba(230, 211, 138, 0.7);
+        }
+
+        .mode-btn.hard {
+            border-color: #cc9900;
+            color: #cc9900;
+        }
+        .mode-btn.hard.active {
+            background: #cc9900;
+            color: black;
+            box-shadow: 0 0 20px rgba(0, 255, 111, 0.7);
+        }
+
+        .mode-btn.extreme {
+            border-color: #ff4500;
+            color: #ff4500;
+        }
+        .mode-btn.extreme.active {
+            background: #ff4500;
+            color: black;
+            box-shadow: 0 0 20px rgba(255, 69, 0, 0.7);
+        }
+
+        .mode-btn.impossible {
+            border-color: #ff00ff;
+            color: #ff00ff;
+        }
+        .mode-btn.impossible.active {
+            background: #ff00ff;
+            color: black;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+        }
+
+        /* SHOP STYLES */
+        #shopMenu {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 200;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            overflow-y: auto;
+            padding: 1rem;
+            touch-action: pan-y;
+        }
+
+        .shop-header {
+            position: sticky;
+            top: 0;
+            background: rgba(0,0,0,0.9);
+            width: 100%;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 2px solid #ffcc00;
+            z-index: 201;
+        }
+
+        .shop-content {
+            width: 100%;
+            max-width: 500px;
+            padding: 1rem;
+        }
+
+        .shop-item {
+            position: relative;
+            background: rgba(255, 204, 0, 0.1);
+            border: 2px solid #ffcc00;
+            border-radius: 15px;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            width: 100%;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            touch-action: manipulation;
+        }
+
+        .system-active-badge {
+            position: absolute;
+            top: 0.5rem;
+            left: 0.7rem;
+            color: #fff176;
+            font-weight: bold;
+            font-size: 0.75rem;
+            text-align: left;
+        }
+
+        .shop-item:active {
+            transform: scale(0.95);
+            background: rgba(255, 204, 0, 0.2);
+        }
+
+        .shop-item.unlocked {
+            border-color: #fff176;
+            background: rgba(152, 251, 152, 0.1);
+        }
+
+        .price-tag {
+            color: #ffcc00;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        /* ULTIMATE PASS STYLES */
+        .ultimate-pass-item {
+            background: linear-gradient(135deg, rgba(255,215,0,0.25), rgba(255,111,0,0.15));
+            border: 3px solid #FFD700;
+            border-radius: 18px;
+            padding: 1.2rem;
+            margin: 0.5rem 0 1.5rem 0;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6), inset 0 0 20px rgba(255, 215, 0, 0.1);
+            animation: ultimateGlow 2.5s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ultimate-pass-item::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.15), transparent);
+            animation: ultimateShine 3.5s linear infinite;
+        }
+
+        @keyframes ultimateGlow {
+            0%, 100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.6), inset 0 0 20px rgba(255, 215, 0, 0.1); }
+            50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.9), inset 0 0 30px rgba(255, 215, 0, 0.2); }
+        }
+
+        @keyframes ultimateShine {
+            0% { transform: rotate(0deg) translateX(-100%); }
+            100% { transform: rotate(0deg) translateX(100%); }
+        }
+
+        .ultimate-pass-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #FFD700, #ffcc00, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ultimate-pass-perks {
+            font-size: 0.8rem;
+            color: #ffe9b3;
+            text-align: left;
+            line-height: 1.6;
+            margin: 0.7rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ultimate-pass-btn {
+            background: linear-gradient(to bottom, #FFD700, #ffcc00);
+            color: #1a0a00;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            font-size: 1rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        .ultimate-pass-btn:active {
+            transform: scale(0.97);
+        }
+
+        #ultimateBadge {
+            display: none;
+            background: linear-gradient(to bottom, #FFD700, #ffcc00);
+            color: #1a0a00;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin: 0.3rem 0;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255, 204, 0, 0.7);
+            color: white;
+            border: none;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            z-index: 202;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        .shop-buttons {
+            position: relative;
+            background: rgba(0,0,0,0.9);
+            width: 100%;
+            padding: 1rem;
+            margin-top: 1rem;
+            text-align: center;
+            border-top: 2px solid #ffcc00;
+        }
+
+        #menuGoldDisplay {
+            background: rgba(255, 204, 0, 0.2);
+            border: 2px solid #ffcc00;
+            border-radius: 20px;
+            padding: 0.6rem 1.2rem;
+            margin: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ffcc00;
+        }
+
+        #menuDiamondsDisplay, #diamondsDisplayShop {
+            background: rgba(255, 245, 157, 0.15);
+            border: 2px solid #fff59d;
+            border-radius: 20px;
+            padding: 0.6rem 1.2rem;
+            margin: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff59d;
+        }
+
+        .mode-description {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            margin-top: 0.2rem;
+            color: #ffd9a8;
+        }
+
+        .boss-health-bar {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 20px;
+            background: rgba(0,0,0,0.7);
+            border: 2px solid #ffcc00;
+            border-radius: 10px;
+            overflow: hidden;
+            z-index: 40;
+        }
+
+        .boss-health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #cc9900, #ffcc00);
+            transition: width 0.3s;
+        }
+
+        .boss-name {
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffcc00;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px #000;
+            z-index: 40;
+        }
+
+        .skin-preview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background: rgba(0,0,0,0.3);
+            border-radius: 10px;
+        }
+
+        .preview-ship {
+            width: 40px;
+            height: 25px;
+            background: var(--ship-color, #ffcc00);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            margin: 0 1rem;
+        }
+
+        .preview-meteor {
+            width: 25px;
+            height: 25px;
+            background: var(--meteor-color, #ffcc00);
+            border-radius: 50%;
+            margin: 0 1rem;
+        }
+
+        .universe-preview {
+            width: 100%;
+            height: 80px;
+            border-radius: 10px;
+            margin: 0.5rem 0;
+            border: 2px solid #ffcc00;
+        }
+
+        /* AGENT BUTTON STYLES */
+        #agentBtn {
+            position: absolute;
+            top: 1rem;
+            right: 5rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            z-index: 50;
+            display: none;
+            font-weight: bold;
+            cursor: pointer;
+            touch-action: manipulation;
+            transition: all 0.3s;
+            border: 2px solid #00ff00;
+        }
+
+        #agentBtn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        #agentBtn.ready {
+            background: rgba(0, 255, 0, 0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        #agentBtn.active {
+            background: rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 25px rgba(0, 255, 0, 0.7);
+        }
+
+        /* Google Play tarzı dönen çember */
+        .agent-progress {
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            width: calc(100% + 6px);
+            height: calc(100% + 6px);
+            border-radius: 50%;
+            background: conic-gradient(#00ff00 0%, transparent 0%);
+            -webkit-mask: radial-gradient(transparent 60%, black 61%);
+            mask: radial-gradient(transparent 60%, black 61%);
+            transition: background 0.3s;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #agentCooldown {
+            position: absolute;
+            top: 5rem;
+            right: 5rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: #00ff00;
+            padding: 0.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            z-index: 50;
+            display: none;
+            border: 1px solid #00ff00;
+        }
+
+        /* Agent aktifken meteorlara özel efekt */
+        .agent-beam {
+            position: absolute;
+            width: 4px;
+            height: 100px;
+            background: linear-gradient(to bottom, #00ff00, transparent);
+            animation: beam 0.5s linear;
+        }
+
+        @keyframes beam {
+            from { height: 0; opacity: 1; }
+            to { height: 100px; opacity: 0; }
+        }
+
+        /* BUDDY BUTTON STYLES */
+        #buddyBtn {
+            position: absolute;
+            top: 1rem;
+            right: 9rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 50%;
+            font-size: 1.8rem;
+            z-index: 50;
+            display: none;
+            font-weight: bold;
+            cursor: pointer;
+            touch-action: manipulation;
+            transition: all 0.3s;
+            border: 2px solid #e6d38a;
+        }
+
+        #buddyBtn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        #buddyBtn.ready {
+            background: rgba(230, 211, 138, 0.2);
+            box-shadow: 0 0 20px rgba(230, 211, 138, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        #buddyBtn.active {
+            background: rgba(230, 211, 138, 0.3);
+            box-shadow: 0 0 25px rgba(230, 211, 138, 0.7);
+        }
+
+        .buddy-progress {
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            width: calc(100% + 6px);
+            height: calc(100% + 6px);
+            border-radius: 50%;
+            background: conic-gradient(#e6d38a 0%, transparent 0%);
+            -webkit-mask: radial-gradient(transparent 60%, black 61%);
+            mask: radial-gradient(transparent 60%, black 61%);
+            transition: background 0.3s;
+        }
+
+        #buddyCooldown {
+            position: absolute;
+            top: 5rem;
+            right: 9rem;
+            background: rgba(0, 0, 0, 0.7);
+            color: #e6d38a;
+            padding: 0.5rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            z-index: 50;
+            display: none;
+            border: 1px solid #e6d38a;
+        }
+
+        /* INTRO EKRANI */
+        #introScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 300;
+            text-align: center;
+            animation: introFadeOut 1.6s ease-in 5s forwards;
+        }
+
+        .intro-logo {
+            font-size: 2.2rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: #ffcc00;
+            text-shadow: 0 0 20px #cc9900, 0 0 40px #cc9900, 0 0 60px #ff4500;
+            opacity: 0;
+            animation: introTextIn 1.2s ease-out forwards, introGlowPulse 2.2s ease-in-out 1.2s infinite;
+        }
+
+        .intro-sub {
+            font-size: 1.3rem;
+            color: #ffd9a8;
+            margin-top: 0.8rem;
+            letter-spacing: 2px;
+            opacity: 0;
+            animation: introTextIn 1.2s ease-out 0.9s forwards;
+        }
+
+        @keyframes introTextIn {
+            from { opacity: 0; transform: translateY(15px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes introGlowPulse {
+            0%, 100% { text-shadow: 0 0 20px #cc9900, 0 0 40px #cc9900, 0 0 60px #ff4500; }
+            50% { text-shadow: 0 0 30px #ffcc00, 0 0 55px #cc9900, 0 0 80px #ff4500; }
+        }
+
+        @keyframes introFadeOut {
+            0% { opacity: 1; filter: blur(0); transform: scale(1); }
+            100% { opacity: 0; filter: blur(18px); transform: scale(1.2); }
+        }
+
+        #toastContainer {
+            position: absolute;
+            top: 1.2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            pointer-events: none;
+            width: 100%;
+            padding: 0 1rem;
+        }
+
+        .toast {
+            background: rgba(15, 15, 15, 0.95);
+            color: white;
+            padding: 0.8rem 1.4rem;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            text-align: center;
+            max-width: 90vw;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.5);
+            border: 2px solid #ffcc00;
+            opacity: 0;
+            transform: translateY(-15px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .toast.toast-show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .toast.toast-error {
+            border-color: #ff5050;
+            color: #ffbaba;
+        }
+
+        .toast.toast-info {
+            border-color: #fff59d;
+            color: #cdf7ff;
+        }
+
+        #devPanelShortcut {
+            position: absolute;
+            top: 0.6rem;
+            left: 0.6rem;
+            width: 2.4rem;
+            height: 2.4rem;
+            border-radius: 50%;
+            background: rgba(255, 204, 0, 0.25);
+            border: 2px solid rgba(255, 204, 0, 0.6);
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            z-index: 400;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #devPanelTrigger {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 0;
+            margin: 0;
+            opacity: 0;
+            cursor: default;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #devPasswordOverlay, #devPanelOverlay, #confirmOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.92);
+            z-index: 300;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        #devPasswordOverlay.show, #devPanelOverlay.show, #confirmOverlay.show {
+            display: flex;
+        }
+
+        .dev-box {
+            background: rgba(20,20,20,0.95);
+            border: 2px solid #ffcc00;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 0 20px rgba(255, 204, 0,0.4);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .dev-box h2 {
+            color: #ffcc00;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .dev-box input {
+            width: 100%;
+            padding: 0.7rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border: 2px solid #ffcc00;
+            background: #111;
+            color: white;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .dev-box .btn {
+            width: 100%;
+            margin: 0.4rem 0;
+        }
+
+        #devPasswordError {
+            color: #ff5050;
+            font-size: 0.9rem;
+            min-height: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dev-panel-row {
+            display: flex;
+            gap: 0.5rem;
+            margin: 0.4rem 0;
+        }
+
+        .dev-panel-row .btn {
+            flex: 1;
+            min-width: 0;
+            padding: 0.7rem 0.5rem;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <div id="introScreen">
+        <div class="intro-logo">ULTIMATE METEOR STUDIOS</div>
+        <div class="intro-sub">Sunar...</div>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+
+    <div id="toastContainer"></div>
+
+    <button id="devPanelShortcut" title="Geliştirici Paneli" style="display:none;">⚙️</button>
+    
+    <button id="pauseBtn">⏸</button>
+
+    <div id="pauseMenu">
+        <h2 class="pause-menu-title" id="pauseMenuTitle">⏸️ OYUN DURAKLATILDI</h2>
+        <button class="btn" id="resumeBtn">▶ DEVAM ET</button>
+        <button class="btn" id="homeBtnPause">🏠 ANA MENÜYE DÖN</button>
+    </div>
+
+    <button id="agentBtn" title="Agent - 10 meteoru yok eder">
+        <span>🛰️</span>
+        <div class="agent-progress"></div>
+    </button>
+    <div id="agentCooldown"></div>
+    <button id="buddyBtn" title="Buddy - 5 saniye boyunca güçleri çeker">
+        <span>🧲</span>
+        <div class="buddy-progress"></div>
+    </button>
+    <div id="buddyCooldown"></div>
+    
+    <div id="gameInfo">
+        <div id="lives">❤️❤️❤️</div>
+        <div id="scoreDisplay">⭐ Skor: 0</div>
+        <div id="goldDisplay">💰 Altın: 0</div>
+        <div id="powerDisplay">⚡ Güçler: </div>
+    </div>
+
+    <div id="bossHealthBar" class="boss-health-bar" style="display: none;">
+        <div class="boss-health-fill" style="width: 100%;"></div>
+    </div>
+    <div id="bossName" class="boss-name" style="display: none;"></div>
+    
+    <div id="menu">
+        <h1 class="menu-title">ULTIMATE METEOR <span style="position:relative;display:inline-block;background:linear-gradient(45deg, #ffcc00, #cc9900, #ffcc00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">5<button id="devPanelTrigger" aria-hidden="true" tabindex="-1"></button></span></h1>
+        <div class="subtitle">NUCLEAR WAR</div>
+        
+        <div id="mode-container">
+            <button class="mode-btn easy active" id="easyMode">KOLAY</button>
+            <button class="mode-btn normal" id="normalMode">NORMAL</button>
+            <button class="mode-btn hard" id="hardMode">ZOR</button>
+            <button class="mode-btn extreme" id="extremeMode">EKSTREM</button>
+            <button class="mode-btn impossible" id="impossibleMode">İMKANSIZ</button>
+        </div>
+        
+        <div id="modeDescription" class="mode-description">
+            Kolay: Yeni başlayanlar için ideal
+        </div>
+        
+        <div id="menuGoldDisplay">💰 Altın: 0</div>
+        <div id="menuDiamondsDisplay">💎 Elmas: 0</div>
+        <div id="ultimateBadge">👑 ULTIMATE PASS AKTİF</div>
+        
+        <button class="btn" id="startBtn">🚀 OYUNU BAŞLAT</button>
+        <button class="btn" id="shopBtn">🛒 KOZMİK MARKET</button>
+
+        <button class="btn" id="language-btn">🌐 DİL: TÜRKÇE</button>
+    </div>
+
+    <div id="shopMenu">
+        <button class="back-btn" id="shopBackBtn">←</button>
+        
+        <div class="shop-header">
+            <h2 id="shopTitle">🚀 KOZMİK MARKET 🌟</h2>
+            <div id="goldDisplayShop">Altın: 0</div>
+            <div id="diamondsDisplayShop">💎 Elmas: 0</div>
+            <div id="levelDisplayShop">⭐ Seviye: 1</div>
+            <div id="boxDisplayShop">📦 Ultimate Box: 0</div>
+            <button class="btn" id="openBoxBtn" style="min-width:auto;padding:0.6rem 1.2rem;font-size:0.95rem;">📦 Kutu Aç</button>
+        </div>
+        
+        <div class="shop-content">
+            <div id="shopItems">
+                <!-- Shop items will be generated here -->
+            </div>
+        </div>
+        
+        <div class="shop-buttons">
+            <button class="btn" id="backToMenuBtn">MENÜYE DÖN</button>
+        </div>
+    </div>
+
+    <div id="controls">
+        <button class="control-btn" id="leftBtn">←</button>
+        <button class="control-btn" id="shootBtn">🔴</button>
+        <button class="control-btn" id="rightBtn">→</button>
+    </div>
+
+    <div id="devPasswordOverlay">
+        <div class="dev-box">
+            <h2>🔒 Geliştirici Paneli</h2>
+            <input type="password" id="devPasswordInput" placeholder="Şifre" autocomplete="off">
+            <div id="devPasswordError"></div>
+            <button class="btn" id="devPasswordSubmit">GİRİŞ</button>
+            <button class="btn" id="devPasswordCancel" style="background: linear-gradient(to bottom, #888, #555);">İPTAL</button>
+        </div>
+    </div>
+
+    <div id="devPanelOverlay">
+        <div class="dev-box">
+            <h2>🛠️ Geliştirici Paneli</h2>
+            <div class="dev-panel-row">
+                <button class="btn" id="devAddGold">+1000 Altın</button>
+                <button class="btn" id="devAddDiamonds">+1000 Elmas</button>
+            </div>
+            <div class="dev-panel-row">
+                <button class="btn" id="devGiveUltimate">Ultimate Pass Ver</button>
+                <button class="btn" id="devGiveBox">+5 Ultimate Box</button>
+            </div>
+            <div class="dev-panel-row">
+                <button class="btn" id="devResetSave" style="background: linear-gradient(to bottom, #ff6b6b, #c0392b);">Kayıtları Sıfırla</button>
+            </div>
+            <button class="btn" id="devPanelClose" style="background: linear-gradient(to bottom, #888, #555);">KAPAT</button>
+        </div>
+    </div>
+
+    <div id="confirmOverlay">
+        <div class="dev-box">
+            <h2 id="confirmMessage">Emin misiniz?</h2>
+            <button class="btn" id="confirmYes" style="background: linear-gradient(to bottom, #ff6b6b, #c0392b);">EVET, SİL</button>
+            <button class="btn" id="confirmNo" style="background: linear-gradient(to bottom, #888, #555);">VAZGEÇ</button>
+        </div>
+    </div>
+
+    <script>
+        // ULTIMATE METEOR 5 - NUCLEAR WAR
+
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const toastContainer = document.getElementById('toastContainer');
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast toast-${type}`;
+            toast.textContent = message;
+            toastContainer.appendChild(toast);
+
+            requestAnimationFrame(() => {
+                toast.classList.add('toast-show');
+            });
+
+            setTimeout(() => {
+                toast.classList.remove('toast-show');
+                setTimeout(() => toast.remove(), 300);
+            }, 2200);
+        }
+
+        const confirmOverlay = document.getElementById('confirmOverlay');
+        const confirmMessage = document.getElementById('confirmMessage');
+        const confirmYesBtn = document.getElementById('confirmYes');
+        const confirmNoBtn = document.getElementById('confirmNo');
+        let confirmCallback = null;
+
+        function showConfirm(message, onConfirm) {
+            confirmMessage.textContent = message;
+            confirmCallback = onConfirm;
+            confirmOverlay.classList.add('show');
+        }
+
+        confirmYesBtn.addEventListener('click', () => {
+            confirmOverlay.classList.remove('show');
+            if (confirmCallback) confirmCallback();
+            confirmCallback = null;
+        });
+
+        confirmNoBtn.addEventListener('click', () => {
+            confirmOverlay.classList.remove('show');
+            confirmCallback = null;
+        });
+        const menu = document.getElementById('menu');
+        const shopMenu = document.getElementById('shopMenu');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const pauseMenu = document.getElementById('pauseMenu');
+        const pauseMenuTitle = document.getElementById('pauseMenuTitle');
+        const resumeBtn = document.getElementById('resumeBtn');
+        const homeBtnPause = document.getElementById('homeBtnPause');
+        const agentBtn = document.getElementById('agentBtn');
+        const agentProgress = agentBtn.querySelector('.agent-progress');
+        const agentCooldown = document.getElementById('agentCooldown');
+        const buddyBtn = document.getElementById('buddyBtn');
+        const buddyProgress = buddyBtn.querySelector('.buddy-progress');
+        const buddyCooldown = document.getElementById('buddyCooldown');
+        const livesDisplay = document.getElementById('lives');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const goldDisplay = document.getElementById('goldDisplay');
+        const powerDisplay = document.getElementById('powerDisplay');
+        const menuGoldDisplay = document.getElementById('menuGoldDisplay');
+        const menuDiamondsDisplay = document.getElementById('menuDiamondsDisplay');
+        const levelDisplayShop = document.getElementById('levelDisplayShop');
+        const boxDisplayShop = document.getElementById('boxDisplayShop');
+        const goldDisplayShop = document.getElementById('goldDisplayShop');
+        const diamondsDisplayShop = document.getElementById('diamondsDisplayShop');
+        const modeDescription = document.getElementById('modeDescription');
+        const bossHealthBar = document.getElementById('bossHealthBar');
+        const bossName = document.getElementById('bossName');
+        const shopTitle = document.getElementById('shopTitle');
+        const ultimateBadge = document.getElementById('ultimateBadge');
+
+        // INTRO EKRANI - animasyon bitince kaldır
+        const introScreen = document.getElementById('introScreen');
+        introScreen.addEventListener('animationend', function(e) {
+            if (e.target === introScreen && e.animationName === 'introFadeOut') {
+                introScreen.style.display = 'none';
+            }
+        });
+        
+        function resizeCanvas() {
+            const size = Math.min(window.innerWidth, window.innerHeight);
+            canvas.width = size * 0.95;
+            canvas.height = size * 1.3;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        let gameActive = false;
+        let gamePaused = false;
+        let lives = 3;
+        let score = 0;
+        let gold = 0;
+        let diamonds = 0;
+        let language = 'Turkish';
+        let gameMode = 'Easy';
+        let meteorsDestroyed = 0;
+        let bossActive = false;
+        let bossHealth = 0;
+        let bossMaxHealth = 0;
+        let currentBoss = null;
+        let currentUniverse = 'default';
+
+        // AGENT SİSTEMİ
+        let agent = {
+            unlocked: false,
+            active: false,
+            cooldown: 0,
+            maxCooldown: 1800, // 30 saniye (60 FPS)
+            price: 80,
+            meteorsToDestroy: 10,
+            meteorsDestroyed: 0
+        };
+
+        // AGENT 2.0 SİSTEMİ (Agent'ın Elmas ile alınan yükseltmesi)
+        let agent2 = {
+            unlocked: false,
+            price: 150,
+            active: false,
+            duration: 0,
+            maxDuration: 300 // 5 saniye (60 FPS)
+        };
+        let agentMiniShips = [];
+
+        // BUDDY SİSTEMİ
+        let buddy = {
+            unlocked: false,
+            active: false,
+            duration: 0,
+            maxDuration: 300, // 5 saniye (60 FPS)
+            cooldown: 0,
+            maxCooldown: 1800, // 30 saniye (60 FPS)
+            price: 80
+        };
+
+        // BUDDY 2.0 SİSTEMİ (Buddy'nin Elmas ile alınan yükseltmesi)
+        let buddy2 = {
+            unlocked: false,
+            price: 150,
+            extendedDuration: 600 // 10 saniye (60 FPS)
+        };
+
+        // ULTIMATE PASS SİSTEMİ
+        let ultimatePass = {
+            owned: false,
+            price: 999,
+            goldMultiplier: 2,
+            extraLives: 1,
+            cooldownReduction: 0.75 // %25 daha hızlı bekleme süresi
+        };
+
+        // SEVİYE SİSTEMİ VE ULTIMATE BOX
+        let playerLevel = 1;
+        let playerXP = 0;
+        let ultimateBoxes = 0;
+
+        function xpForLevel(level) {
+            return 300 + (level - 1) * 150;
+        }
+
+        function addXP(amount) {
+            if (amount <= 0) return;
+            const lang = texts[language];
+            playerXP += amount;
+
+            let leveledUp = false;
+            while (playerXP >= xpForLevel(playerLevel)) {
+                playerXP -= xpForLevel(playerLevel);
+                playerLevel++;
+                ultimateBoxes++;
+                leveledUp = true;
+            }
+
+            if (leveledUp) {
+                showToast(`⭐ ${lang.levelUp} ${playerLevel}! +1 ${lang.boxLabel}`);
+            }
+
+            drawLevel();
+            drawBoxes();
+            saveGameData();
+        }
+
+        function drawLevel() {
+            const lang = texts[language];
+            const needed = xpForLevel(playerLevel);
+            levelDisplayShop.textContent = `⭐ ${lang.levelLabel}${playerLevel} (${playerXP}/${needed} XP)`;
+        }
+
+        function drawBoxes() {
+            const lang = texts[language];
+            const boxText = `📦 ${lang.boxLabel}${ultimateBoxes}`;
+            boxDisplayShop.textContent = boxText;
+        }
+
+        function getLockedBoxSkins() {
+            const options = [];
+            Object.keys(shipSkins).forEach(key => {
+                const skin = shipSkins[key];
+                if (!skin.unlocked && !skin.exclusive) {
+                    options.push({ type: 'ship', key });
+                }
+            });
+            Object.keys(meteorSkins).forEach(key => {
+                const skin = meteorSkins[key];
+                if (!skin.unlocked) {
+                    options.push({ type: 'meteor', key });
+                }
+            });
+            return options;
+        }
+
+        function openUltimateBox() {
+            const lang = texts[language];
+
+            if (ultimateBoxes <= 0) {
+                showToast(lang.notEnoughBoxes, 'error');
+                return;
+            }
+
+            ultimateBoxes--;
+
+            const roll = Math.random();
+            const skinOptions = getLockedBoxSkins();
+
+            if (roll < 0.1 && skinOptions.length > 0) {
+                const pick = skinOptions[Math.floor(Math.random() * skinOptions.length)];
+                let skinName;
+                if (pick.type === 'ship') {
+                    shipSkins[pick.key].unlocked = true;
+                    skinName = shipSkins[pick.key].name[language];
+                } else {
+                    meteorSkins[pick.key].unlocked = true;
+                    skinName = meteorSkins[pick.key].name[language];
+                }
+                setupShop();
+                showToast(`📦 ${lang.boxOpened} 🎨 ${skinName}${lang.boxSkinReward}`);
+            } else if (roll < 0.3) {
+                const diamondReward = 10 + Math.floor(Math.random() * 31); // 10-40
+                addDiamonds(diamondReward);
+                showToast(`📦 ${lang.boxOpened} +${diamondReward} 💎`);
+            } else {
+                const goldReward = 50 + Math.floor(Math.random() * 201); // 50-250
+                addGold(goldReward);
+                drawGold();
+                showToast(`📦 ${lang.boxOpened} +${goldReward} 💰`);
+            }
+
+            drawBoxes();
+            saveGameData();
+        }
+
+        // GEMİ GÜÇLENDİRMELERİ SİSTEMİ (Elmas ile satın alınır)
+        let doubleShotMode = 'side'; // 'side' = yan yana, 'sequential' = arka arkaya
+        let shipUpgrades = {
+            doubleShot: {
+                unlocked: false,
+                price: 50,
+                icon: '🔫',
+                name: { Turkish: 'Çift Mermi', English: 'Double Shot' },
+                desc: { Turkish: 'Her basışta 2 mermi ateşle', English: 'Fire 2 bullets per shot' }
+            },
+            extraArmor: {
+                unlocked: false,
+                price: 120,
+                icon: '🛡️',
+                name: { Turkish: 'Ekstra Zırh', English: 'Extra Armor' },
+                desc: { Turkish: 'Her oyunda +1 can ile başla', English: 'Start every game with +1 life' }
+            },
+            luckyStar: {
+                unlocked: false,
+                price: 100,
+                icon: '🍀',
+                name: { Turkish: 'Şanslı Yıldız', English: 'Lucky Star' },
+                desc: { Turkish: 'Güç düşme ihtimali %50 artar', English: 'Power-up drop chance increased by 50%' }
+            },
+            shieldStart: {
+                unlocked: false,
+                price: 150,
+                icon: '✨',
+                name: { Turkish: 'Başlangıç Kalkanı', English: 'Starting Shield' },
+                desc: { Turkish: 'Her oyuna bir kalkanla başla', English: 'Start every game with a shield' }
+            }
+        };
+
+        let stars = [];
+        function createStars() {
+            stars = [];
+            for (let i = 0; i < 100; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 1,
+                    speed: Math.random() * 0.5 + 0.1,
+                    brightness: Math.random() * 0.5 + 0.5
+                });
+            }
+        }
+
+        function updateStars() {
+            stars.forEach(star => {
+                star.y += star.speed;
+                if (star.y > canvas.height) {
+                    star.y = 0;
+                    star.x = Math.random() * canvas.width;
+                }
+            });
+        }
+
+        function drawStars() {
+            stars.forEach(star => {
+                ctx.globalAlpha = star.brightness;
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1.0;
+        }
+
+        // EVREN SİSTEMİ
+        const universes = {
+            default: {
+                name: { Turkish: 'Standart Evren', English: 'Standard Universe' },
+                background: '#1a0a00',
+                unlocked: true,
+                price: 0
+            },
+            earth: {
+                name: { Turkish: 'Dünya Evreni', English: 'Earth Universe' },
+                background: '#001122',
+                unlocked: false,
+                price: 100
+            },
+            apocalypse: {
+                name: { Turkish: 'Kıyamet Evreni', English: 'Apocalypse Universe' },
+                background: '#330000',
+                unlocked: false,
+                price: 100
+            },
+            volcano: {
+                name: { Turkish: 'Volkan Evreni', English: 'Volcano Universe' },
+                background: '#2b0a00',
+                unlocked: false,
+                price: 100
+            },
+            blackhole: {
+                name: { Turkish: 'Kara Delik Evreni', English: 'Black Hole Universe' },
+                background: '#05000a',
+                unlocked: false,
+                price: 100
+            },
+            ice: {
+                name: { Turkish: 'Buz Evreni', English: 'Ice Universe' },
+                background: '#001a2e',
+                unlocked: false,
+                price: 100
+            }
+        };
+
+        let shipSkins = {
+            default: { color: '#ffcc00', name: { Turkish: 'Lavanta Savaşçı', English: 'Lavender Warrior' }, unlocked: true },
+            premium: { color: '#FFD700', name: { Turkish: 'Altın Savaşçı', English: 'Golden Warrior' }, price: 35, unlocked: false },
+            fire: { color: '#FF4500', name: { Turkish: 'Ateş Savaşçısı', English: 'Fire Warrior' }, price: 35, unlocked: false },
+            ice: { color: '#00FFFF', name: { Turkish: 'Buz Savaşçısı', English: 'Ice Warrior' }, price: 35, unlocked: false },
+            neon: { color: '#FF00FF', name: { Turkish: 'Neon Savaşçısı', English: 'Neon Warrior' }, price: 35, unlocked: false },
+            cosmic: { color: '#cc9900', name: { Turkish: 'Kozmik Savaşçı', English: 'Cosmic Warrior' }, price: 40, unlocked: false },
+            volcano: { color: '#ff3300', name: { Turkish: 'Volkan Savaşçısı', English: 'Volcano Warrior' }, price: 40, unlocked: false },
+            shadow: { color: '#2b0a40', name: { Turkish: 'Gölge Savaşçısı', English: 'Shadow Warrior' }, price: 40, unlocked: false },
+            toxic: { color: '#39ff14', name: { Turkish: 'Toksik Savaşçı', English: 'Toxic Warrior' }, price: 35, unlocked: false },
+            royal: { color: '#4169e1', name: { Turkish: 'Kraliyet Savaşçısı', English: 'Royal Warrior' }, price: 45, unlocked: false },
+            ultimate: { color: '#F5F5F5', name: { Turkish: 'Ultimate Komutan', English: 'Ultimate Commander' }, price: 0, unlocked: false, exclusive: true }
+        };
+
+        let meteorSkins = {
+            default: { color: '#ffcc00', name: { Turkish: 'Lavanta Meteor', English: 'Lavender Meteor' }, unlocked: true },
+            gold: { color: '#FFD700', name: { Turkish: 'Altın Meteor', English: 'Golden Meteor' }, price: 25, unlocked: false },
+            crystal: { color: '#87CEEB', name: { Turkish: 'Kristal Meteor', English: 'Crystal Meteor' }, price: 25, unlocked: false },
+            lava: { color: '#FF8C00', name: { Turkish: 'Lav Meteor', English: 'Lava Meteor' }, price: 25, unlocked: false },
+            cosmic: { color: '#cc9900', name: { Turkish: 'Kozmik Meteor', English: 'Cosmic Meteor' }, price: 25, unlocked: false },
+            dark: { color: '#4B0082', name: { Turkish: 'Karanlık Meteor', English: 'Dark Meteor' }, price: 30, unlocked: false }
+        };
+
+        let currentShipSkin = 'default';
+        let currentMeteorSkin = 'default';
+
+        const METEOR_TYPES = {
+            NORMAL: { health: 1, color: '#ffcc00', points: 10 },
+            LAVA: { health: 2, color: '#ff4500', points: 15, effect: 'explosive' },
+            DARK: { health: 3, color: '#cc9900', points: 20, effect: 'invisible' },
+            SPLIT: { health: 1, color: '#ffd9a8', points: 12, effect: 'split' }
+        };
+
+        let powerUps = {
+            shield: { active: false, duration: 0, maxDuration: 600 },
+            rapidFire: { active: false, duration: 0, maxDuration: 450 },
+            tripleShot: { active: false, duration: 0, maxDuration: 300 },
+            bomb: { active: false, duration: 0, maxDuration: 180 },
+            laser: { active: false, duration: 0, maxDuration: 240 },
+            timeFreeze: { active: false, duration: 0, maxDuration: 400 },
+            apocalypse: { active: false, duration: 0, maxDuration: 200 },
+            piercing: { active: false, duration: 0, maxDuration: 350 },
+            invincible: { active: false, duration: 0, maxDuration: 250 },
+            doubleScore: { active: false, duration: 0, maxDuration: 500 }
+        };
+
+        const BOSSES = {
+            INFERNO_DRAGON: {
+                name: '🔥 Ateş Ejderhası',
+                health: 1000,
+                color: '#ff4500',
+                attackPattern: 'fire',
+                speed: 1.5,
+                size: 150
+            },
+            DARK_LORD: {
+                name: '🌑 Karanlık Lordu', 
+                health: 1200,
+                color: '#cc9900',
+                attackPattern: 'shadow',
+                speed: 2,
+                size: 130
+            },
+            APOCALYPSE_BEAST: {
+                name: '💀 Kıyamet Canavarı',
+                health: 1500,
+                color: '#ffcc00',
+                attackPattern: 'multi',
+                speed: 1,
+                size: 180
+            }
+        };
+
+        let activePowerUps = [];
+        let powerUpItems = [];
+        let explosions = [];
+        let agentBeams = [];
+
+        const texts = {
+            English: {
+                start: '🚀 START GAME',
+                shop: '🛒 COSMIC MARKETPLACE',
+                controlsBtn: '⌨️ KEYBOARD CONTROLS',
+                language: '🌐 LANGUAGE: ENGLISH',
+                backToMenu: 'BACK TO MENU',
+                easy: 'EASY',
+                normal: 'NORMAL', 
+                hard: 'HARD',
+                extreme: 'EXTREME',
+                impossible: 'IMPOSSIBLE',
+                lives: 'Lives: ',
+                score: 'Score: ',
+                gold: 'Gold: ',
+                pause: 'GAME PAUSED',
+                resumeBtn: '▶ RESUME',
+                homeBtnPause: '🏠 RETURN TO MAIN MENU',
+                powers: 'Powers: ',
+                boss: 'BOSS INCOMING!',
+                shopTitle: '🚀 COSMIC MARKETPLACE 🌟',
+                shipSkins: '🚀 SPACESHIP SKINS - 35 GOLD',
+                meteorSkins: '☄️ METEOR SKINS - 25 GOLD',
+                universes: '🌌 UNIVERSES - 100 GOLD',
+                helperSystems: '🛡️ HELPER SYSTEMS',
+                price: 'Price: ',
+                owned: '✅ OWNED',
+                buy: '🛒 BUY NOW',
+                purchaseSuccess: ' successfully purchased!',
+                controlsText: "🎮 GAME CONTROLS:\n\nMovement: A/D or Left/Right Arrows\nShoot: Space or W or Click/Tap\nPause/Resume: P\nAgent: Q (when available)\nBuddy: E (when available)\n\n📱 TOUCH CONTROLS:\nLeft/Right buttons for movement\nRed button to shoot\nAgent button when available\nBuddy button when available",
+                modeDescriptions: {
+                    easy: 'Easy Mode: Perfect for beginners - Slow meteors, more lives',
+                    normal: 'Normal Mode: Balanced challenge - Standard speed and difficulty',
+                    hard: 'Hard Mode: For experienced players - Faster meteors, more health', 
+                    extreme: 'Extreme Mode: Only for experts - Very fast, tough meteors',
+                    impossible: 'Impossible Mode: Are you crazy? - Ultimate challenge!'
+                },
+                notEnoughGold: 'Not enough gold! Destroy more meteors to earn gold.',
+                notEnoughDiamonds: 'Not enough diamonds! Destroy 10 meteors to earn 5 diamonds.',
+                equipSuccess: ' equipped successfully!',
+                alreadyOwned: 'You already own this item!',
+                agentDescription: '🛰 AGENT - Destroys 10 meteors automatically',
+                agentReady: 'Agent Ready! Press Q or click the button',
+                agentActive: 'Agent is destroying meteors!',
+                agentCooldown: 'Agent cooldown: ',
+                buddyDescription: '🧲 BUDDY - Pulls power-ups to the player for 5 seconds',
+                buddyReady: 'Buddy Ready! Press E or click the button',
+                buddyActive: 'Buddy is pulling power-ups!',
+                buddyCooldown: 'Buddy cooldown: ',
+                ultimatePassTitle: '👑 ULTIMATE PASS',
+                ultimatePassSubtitle: 'The ultimate upgrade for true commanders',
+                ultimatePassPerks: '✅ 2x GOLD from every meteor & boss<br>✅ Exclusive glowing golden ship skin<br>✅ +1 extra life every game<br>✅ Agent & Buddy unlocked instantly<br>✅ All universes unlocked<br>✅ 25% faster Agent/Buddy cooldowns',
+                ultimatePassBuy: '👑 GET ULTIMATE PASS',
+                ultimatePassOwned: '✅ ULTIMATE PASS ACTIVE',
+                ultimatePassSuccess: 'ULTIMATE PASS activated! All perks unlocked, commander!',
+                ultimateActiveMenu: '👑 ULTIMATE PASS ACTIVE',
+                levelLabel: 'Level: ',
+                levelUp: 'Level up! Level',
+                boxLabel: 'Ultimate Box: ',
+                openBox: '📦 OPEN BOX',
+                boxOpened: 'Ultimate Box opened!',
+                boxSkinReward: ' skin unlocked!',
+                notEnoughBoxes: 'You don\'t have any Ultimate Box! Level up or get the Ultimate Pass to earn one.'
+            },
+            Turkish: {
+                start: '🚀 OYUNU BAŞLAT',
+                shop: '🛒 KOZMİK MARKET',
+                controlsBtn: '⌨️ KLAVYE KONTROLLERİ',
+                language: '🌐 DİL: TÜRKÇE',
+                backToMenu: 'MENÜYE DÖN',
+                easy: 'KOLAY',
+                normal: 'NORMAL',
+                hard: 'ZOR', 
+                extreme: 'EKSTREM',
+                impossible: 'İMKANSIZ',
+                lives: 'Can: ',
+                score: 'Skor: ',
+                gold: 'Altın: ',
+                pause: 'OYUN DURAKLATILDI',
+                resumeBtn: '▶ DEVAM ET',
+                homeBtnPause: '🏠 ANA MENÜYE DÖN',
+                powers: 'Güçler: ',
+                boss: 'BOSS GELİYOR!',
+                shopTitle: '🚀 KOZMİK MARKET 🌟',
+                shipSkins: '🚀 GEMİ SKİNLERİ - 35 ALTIN',
+                meteorSkins: '☄️ METEOR SKİNLERİ - 25 ALTIN',
+                universes: '🌌 EVRENLER - 100 ALTIN',
+                helperSystems: '🛡️ YARDIMCI SİSTEMLER',
+                price: 'Fiyat: ',
+                owned: '✅ SAHİPSİN',
+                buy: '🛒 SATIN AL',
+                purchaseSuccess: ' başarıyla satın alındı!',
+                controlsText: "🎮 OYUN KONTROLLERİ:\n\nHareket: A/D veya Sol/Sağ Oklar\nAteş Et: Boşluk veya W veya Tıklama\nDuraklat/Devam: P\nAgent: Q (hazır olduğunda)\nBuddy: E (hazır olduğunda)\n\n📱 DOKUNMATİK KONTROLLER:\nHareket için sol/sağ butonlar\nAteş etmek için kırmızı buton\nAgent butonu hazır olduğunda\nBuddy butonu hazır olduğunda",
+                modeDescriptions: {
+                    easy: 'Kolay Mod: Yeni başlayanlar için ideal - Yavaş meteorlar, fazla can',
+                    normal: 'Normal Mod: Dengeli zorluk - Standart hız ve zorluk',
+                    hard: 'Zor Mod: Tecrübeli oyuncular için - Hızlı meteorlar, fazla can', 
+                    extreme: 'Ekstrem Mod: Sadece uzmanlar için - Çok hızlı, güçlü meteorlar',
+                    impossible: 'İmkansız Mod: Deli misin? - Ultimate zorluk!'
+                },
+                notEnoughGold: 'Yeterli altın yok! Daha fazla meteor yok ederek altın kazan.',
+                notEnoughDiamonds: 'Yeterli elmas yok! 10 meteor yok ederek 5 elmas kazanırsın.',
+                equipSuccess: ' başarıyla eklendi!',
+                alreadyOwned: 'Bu eşyaya zaten sahipsin!',
+                agentDescription: '🛰 AGENT - 10 meteoru otomatik olarak yok eder',
+                agentReady: 'Agent Hazır! Q tuşuna basın veya butona tıklayın',
+                agentActive: 'Agent meteorları yok ediyor!',
+                agentCooldown: 'Agent bekleme süresi: ',
+                buddyDescription: '🧲 BUDDY - 5 saniye boyunca güçleri oyuncuya çeker',
+                buddyReady: 'Buddy Hazır! E tuşuna basın veya butona tıklayın',
+                buddyActive: 'Buddy güçleri çekiyor!',
+                buddyCooldown: 'Buddy bekleme süresi: ',
+                ultimatePassTitle: '👑 ULTIMATE PASS',
+                ultimatePassSubtitle: 'Gerçek komutanlar için nihai yükseltme',
+                ultimatePassPerks: '✅ Her meteor ve bosstan 2 KAT ALTIN<br>✅ Özel parlayan altın gemi skini<br>✅ Her oyunda +1 ekstra can<br>✅ Agent & Buddy anında açılır<br>✅ Tüm evrenler açılır<br>✅ %25 daha hızlı Agent/Buddy bekleme süresi',
+                ultimatePassBuy: '👑 ULTIMATE PASS AL',
+                ultimatePassOwned: '✅ ULTIMATE PASS AKTİF',
+                ultimatePassSuccess: 'ULTIMATE PASS aktif edildi! Tüm ayrıcalıklar açıldı, komutanım!',
+                ultimateActiveMenu: '👑 ULTIMATE PASS AKTİF',
+                levelLabel: 'Seviye: ',
+                levelUp: 'Seviye atladın! Seviye',
+                boxLabel: 'Ultimate Box: ',
+                openBox: '📦 KUTU AÇ',
+                boxOpened: 'Ultimate Box açıldı!',
+                boxSkinReward: ' skin kazandın!',
+                notEnoughBoxes: 'Hiç Ultimate Box\'ın yok! Seviye atla ya da Ultimate Pass al.'
+            }
+        };
+
+        const ship = {
+            x: canvas.width / 2,
+            y: canvas.height - 80,
+            width: 45,
+            height: 30,
+            speed: 6,
+            health: 100,
+            maxHealth: 100,
+            color: '#ffcc00',
+            moveLeft: false,
+            moveRight: false,
+            shield: false
+        };
+
+        const gameModeSettings = {
+            Easy: {
+                meteorSize: 20,
+                meteorSpeed: 2,
+                meteorHealth: 1,
+                spawnRate: 0.02,
+                powerUpRate: 0.01,
+                bossHealth: 500,
+                playerSpeed: 5,
+                lives: 3
+            },
+            Normal: {
+                meteorSize: 18,
+                meteorSpeed: 3,
+                meteorHealth: 1,
+                spawnRate: 0.025,
+                powerUpRate: 0.008,
+                bossHealth: 800,
+                playerSpeed: 6,
+                lives: 3
+            },
+            Hard: {
+                meteorSize: 16,
+                meteorSpeed: 4,
+                meteorHealth: 2,
+                spawnRate: 0.03,
+                powerUpRate: 0.006,
+                bossHealth: 1000,
+                playerSpeed: 6,
+                lives: 3
+            },
+            Extreme: {
+                meteorSize: 15,
+                meteorSpeed: 5,
+                meteorHealth: 2,
+                spawnRate: 0.035,
+                powerUpRate: 0.005,
+                bossHealth: 1200,
+                playerSpeed: 7,
+                lives: 3
+            },
+            Impossible: {
+                meteorSize: 12,
+                meteorSpeed: 7,
+                meteorHealth: 3,
+                spawnRate: 0.05,
+                powerUpRate: 0.003,
+                bossHealth: 1500,
+                playerSpeed: 8,
+                lives: 3
+            }
+        };
+
+        let meteors = [];
+        let bullets = [];
+        let boss = null;
+
+        function setupControls() {
+            const leftBtn = document.getElementById('leftBtn');
+            const rightBtn = document.getElementById('rightBtn');
+            const shootBtn = document.getElementById('shootBtn');
+
+            const handleStart = (e, isLeft) => {
+                e.preventDefault();
+                if (isLeft) {
+                    ship.moveLeft = true;
+                    ship.moveRight = false;
+                } else {
+                    ship.moveRight = true;
+                    ship.moveLeft = false;
+                }
+            };
+
+            const handleEnd = (e, isLeft) => {
+                e.preventDefault();
+                if (isLeft) {
+                    ship.moveLeft = false;
+                } else {
+                    ship.moveRight = false;
+                }
+            };
+            
+            leftBtn.addEventListener('touchstart', (e) => handleStart(e, true));
+            leftBtn.addEventListener('touchend', (e) => handleEnd(e, true));
+            leftBtn.addEventListener('mousedown', (e) => handleStart(e, true));
+            leftBtn.addEventListener('mouseup', (e) => handleEnd(e, true));
+
+            rightBtn.addEventListener('touchstart', (e) => handleStart(e, false));
+            rightBtn.addEventListener('touchend', (e) => handleEnd(e, false));
+            rightBtn.addEventListener('mousedown', (e) => handleStart(e, false));
+            rightBtn.addEventListener('mouseup', (e) => handleEnd(e, false));
+
+            shootBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                if (gameActive && !gamePaused) shoot();
+            });
+            shootBtn.addEventListener('mousedown', (e) => {
+                e.preventDefault();
+                if (gameActive && !gamePaused) shoot();
+            });
+            
+            // Klavye kontrolleri kaldırıldı - sadece dokunmatik/mouse kontrolleri kullanılıyor
+
+            // Agent butonu event listener
+            agentBtn.addEventListener('click', function() {
+                if (gameActive && !gamePaused && agent.unlocked && agent.cooldown <= 0 && !agent.active) {
+                    activateAgent();
+                }
+            });
+
+            // Buddy butonu event listener
+            buddyBtn.addEventListener('click', function() {
+                if (gameActive && !gamePaused && buddy.unlocked && buddy.cooldown <= 0 && !buddy.active) {
+                    activateBuddy();
+                }
+            });
+        }
+
+        function activateAgent() {
+            if (!agent.unlocked || agent.active || agent.cooldown > 0) return;
+            
+            agent.active = true;
+            agent.meteorsDestroyed = 0;
+            agentBtn.disabled = true;
+            agentBtn.classList.remove('ready');
+            agentBtn.classList.add('active');
+            
+            // Mesaj gösterme - KALDIRILDI
+        }
+
+        function updateAgent() {
+            // Progress çemberini güncelle
+            if (agent.cooldown > 0) {
+                const progress = 100 - (agent.cooldown / agent.maxCooldown) * 100;
+                agentProgress.style.background = `conic-gradient(#00ff00 ${progress}%, transparent ${progress}%)`;
+                agent.cooldown--;
+                
+                // Cooldown gösterimi
+                const seconds = Math.ceil(agent.cooldown / 60);
+                const lang = texts[language];
+                agentCooldown.textContent = lang.agentCooldown + seconds + 's';
+                
+                if (agent.cooldown <= 0) {
+                    agentCooldown.style.display = 'none';
+                    agentProgress.style.background = 'conic-gradient(#00ff00 100%, transparent 0%)';
+                    if (agent.unlocked) {
+                        agentBtn.disabled = false;
+                        agentBtn.classList.add('ready');
+                        agentBtn.classList.remove('active');
+                    }
+                }
+            } else {
+                agentProgress.style.background = 'conic-gradient(#00ff00 100%, transparent 0%)';
+            }
+            
+            if (agent.active) {
+                // En yakın 10 meteoru yok et
+                if (meteors.length > 0 && agent.meteorsDestroyed < agent.meteorsToDestroy) {
+                    const meteor = meteors[0]; // İlk meteoru al
+                    
+                    // Işın efekti oluştur
+                    agentBeams.push({
+                        x: meteor.x,
+                        y: 0,
+                        height: meteor.y,
+                        life: 1.0
+                    });
+                    
+                    // Meteoru yok et
+                    createExplosion(meteor.x, meteor.y, meteor.size * 2, '#00ff00');
+                    score += meteor.points;
+                    addGold(Math.floor(meteor.points / 5));
+                    agent.meteorsDestroyed++;
+                    
+                    meteors.splice(0, 1);
+                    
+                    drawScore();
+                    drawGold();
+                    saveGameData();
+                    
+                    // Tüm meteorları yok ettiyse agent'ı kapat
+                    if (agent.meteorsDestroyed >= agent.meteorsToDestroy) {
+                        agent.active = false;
+                        agentBtn.classList.remove('active');
+                        if (agent2.unlocked) {
+                            startAgent2Split();
+                        } else {
+                            agent.cooldown = agent.maxCooldown;
+                            agentCooldown.style.display = 'block';
+                        }
+                    }
+                } else if (meteors.length === 0) {
+                    // Meteor kalmadıysa agent'ı kapat
+                    agent.active = false;
+                    agentBtn.classList.remove('active');
+                    if (agent2.unlocked) {
+                        startAgent2Split();
+                    } else {
+                        agent.cooldown = agent.maxCooldown;
+                        agentCooldown.style.display = 'block';
+                    }
+                }
+            }
+        }
+
+        // AGENT 2.0: Agent ikiye bölünür ve 5 saniye boyunca meteor/boss vurur
+        function startAgent2Split() {
+            agent2.active = true;
+            agent2.duration = agent2.maxDuration;
+            const edgeMargin = 40;
+            const miniY = Math.max(90, ship.y - 160);
+            agentMiniShips = [
+                { x: edgeMargin, y: miniY, shootTimer: 0 },
+                { x: canvas.width - edgeMargin, y: miniY, shootTimer: 10 }
+            ];
+        }
+
+        function updateAgent2() {
+            if (!agent2.active) return;
+
+            agent2.duration--;
+
+            const baseDamage = 10; // Oyuncunun temel mermi hasarıyla aynı
+            const bulletSpeed = 10;
+
+            agentMiniShips.forEach(mini => {
+                mini.shootTimer--;
+                if (mini.shootTimer <= 0) {
+                    // En yakın hedefi bul (meteor veya boss)
+                    let target = null;
+                    let minDist = Infinity;
+
+                    meteors.forEach(m => {
+                        const dx = m.x - mini.x;
+                        const dy = m.y - mini.y;
+                        const dist = dx * dx + dy * dy;
+                        if (dist < minDist) {
+                            minDist = dist;
+                            target = m;
+                        }
+                    });
+
+                    if (bossActive && boss) {
+                        const dx = boss.x - mini.x;
+                        const dy = boss.y - mini.y;
+                        const dist = dx * dx + dy * dy;
+                        if (dist < minDist) {
+                            minDist = dist;
+                            target = boss;
+                        }
+                    }
+
+                    let vx = 0, vy = -bulletSpeed;
+                    if (target) {
+                        const dx = target.x - mini.x;
+                        const dy = target.y - (mini.y - 15);
+                        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+                        vx = (dx / dist) * bulletSpeed;
+                        vy = (dy / dist) * bulletSpeed;
+                    }
+
+                    bullets.push({
+                        x: mini.x,
+                        y: mini.y - 15,
+                        vx: vx,
+                        vy: vy,
+                        color: '#00ff88',
+                        width: 5,
+                        height: 15,
+                        damage: baseDamage
+                    });
+                    mini.shootTimer = 18;
+                }
+            });
+
+            if (agent2.duration <= 0) {
+                agent2.active = false;
+                agentMiniShips = [];
+                agent.cooldown = agent.maxCooldown;
+                agentCooldown.style.display = 'block';
+            }
+        }
+
+        function drawAgentMiniShips() {
+            agentMiniShips.forEach(mini => {
+                ctx.fillStyle = ship.color;
+                ctx.beginPath();
+                ctx.moveTo(mini.x, mini.y - 15);
+                ctx.lineTo(mini.x - 12, mini.y + 8);
+                ctx.lineTo(mini.x + 12, mini.y + 8);
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.strokeStyle = '#00ff88';
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.moveTo(mini.x, mini.y - 15);
+                ctx.lineTo(mini.x - 12, mini.y + 8);
+                ctx.lineTo(mini.x + 12, mini.y + 8);
+                ctx.closePath();
+                ctx.stroke();
+            });
+        }
+
+        function drawAgentBeams() {
+            agentBeams.forEach((beam, index) => {
+                ctx.globalAlpha = beam.life;
+                ctx.strokeStyle = '#00ff00';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(beam.x, beam.y);
+                ctx.lineTo(beam.x, beam.y + beam.height);
+                ctx.stroke();
+                
+                // Işın ucu efekti
+                ctx.fillStyle = '#00ff00';
+                ctx.beginPath();
+                ctx.arc(beam.x, beam.y + beam.height, 5, 0, Math.PI * 2);
+                ctx.fill();
+                
+                beam.life -= 0.05;
+                if (beam.life <= 0) {
+                    agentBeams.splice(index, 1);
+                }
+            });
+            ctx.globalAlpha = 1.0;
+        }
+
+        function activateBuddy() {
+            if (!buddy.unlocked || buddy.active || buddy.cooldown > 0) return;
+
+            buddy.active = true;
+            buddy.duration = buddy2.unlocked ? buddy2.extendedDuration : buddy.maxDuration;
+            buddyBtn.disabled = true;
+            buddyBtn.classList.remove('ready');
+            buddyBtn.classList.add('active');
+        }
+
+        function updateBuddy() {
+            // Progress çemberini güncelle
+            if (buddy.cooldown > 0) {
+                const progress = 100 - (buddy.cooldown / buddy.maxCooldown) * 100;
+                buddyProgress.style.background = `conic-gradient(#e6d38a ${progress}%, transparent ${progress}%)`;
+                buddy.cooldown--;
+
+                const seconds = Math.ceil(buddy.cooldown / 60);
+                const lang = texts[language];
+                buddyCooldown.textContent = lang.buddyCooldown + seconds + 's';
+
+                if (buddy.cooldown <= 0) {
+                    buddyCooldown.style.display = 'none';
+                    buddyProgress.style.background = 'conic-gradient(#e6d38a 100%, transparent 0%)';
+                    if (buddy.unlocked) {
+                        buddyBtn.disabled = false;
+                        buddyBtn.classList.add('ready');
+                        buddyBtn.classList.remove('active');
+                    }
+                }
+            } else {
+                buddyProgress.style.background = 'conic-gradient(#e6d38a 100%, transparent 0%)';
+            }
+
+            if (buddy.active) {
+                buddy.duration--;
+
+                if (buddy.duration <= 0) {
+                    buddy.active = false;
+                    buddy.cooldown = buddy.maxCooldown;
+                    buddyCooldown.style.display = 'block';
+                    buddyBtn.classList.remove('active');
+                }
+            }
+        }
+
+        function createMeteor() {
+            const settings = gameModeSettings[gameMode];
+            const meteorTypes = Object.keys(METEOR_TYPES);
+            const randomType = meteorTypes[Math.floor(Math.random() * meteorTypes.length)];
+            const type = METEOR_TYPES[randomType];
+            
+            const meteorColor = meteorSkins[currentMeteorSkin].color;
+            
+            return {
+                x: Math.random() * canvas.width,
+                y: -30,
+                size: randomType === 'SPLIT' ? settings.meteorSize * 0.65 : settings.meteorSize,
+                speed: settings.meteorSpeed,
+                health: type.health,
+                color: meteorColor,
+                type: randomType,
+                points: type.points,
+                effect: type.effect,
+                invisible: type.effect === 'invisible' ? Math.random() < 0.5 : false
+            };
+        }
+
+        function createBoss() {
+            const settings = gameModeSettings[gameMode];
+            const bossKeys = Object.keys(BOSSES);
+            const randomBoss = bossKeys[Math.floor(Math.random() * bossKeys.length)];
+            const bossData = BOSSES[randomBoss];
+            
+            bossActive = true;
+            bossHealth = bossData.health * (settings.bossHealth / 1000);
+            bossMaxHealth = bossHealth;
+            currentBoss = randomBoss;
+            
+            bossHealthBar.style.display = 'block';
+            bossName.style.display = 'block';
+            bossName.textContent = bossData.name;
+            updateBossHealthBar();
+            
+            return {
+                x: canvas.width / 2,
+                y: 100,
+                width: bossData.size,
+                height: bossData.size * 0.6,
+                speed: bossData.speed,
+                color: bossData.color,
+                attackPattern: bossData.attackPattern,
+                lastAttack: 0,
+                attackCooldown: 2000,
+                name: bossData.name
+            };
+        }
+
+        function updateBossHealthBar() {
+            const healthPercent = (bossHealth / bossMaxHealth) * 100;
+            const healthFill = bossHealthBar.querySelector('.boss-health-fill');
+            healthFill.style.width = healthPercent + '%';
+            
+            if (healthPercent > 60) {
+                healthFill.style.background = 'linear-gradient(90deg, #cc9900, #ffcc00)';
+            } else if (healthPercent > 30) {
+                healthFill.style.background = 'linear-gradient(90deg, #ffcc00, #ff4500)';
+            } else {
+                healthFill.style.background = 'linear-gradient(90deg, #ff4500, #cc9900)';
+            }
+        }
+
+        function createPowerUp() {
+            const settings = gameModeSettings[gameMode];
+            const powerTypes = ['shield', 'rapidFire', 'tripleShot', 'bomb', 'laser', 'timeFreeze', 'apocalypse', 'piercing', 'invincible', 'doubleScore'];
+            const type = powerTypes[Math.floor(Math.random() * powerTypes.length)];
+            
+            return {
+                x: Math.random() * (canvas.width - 30),
+                y: -20,
+                width: 25,
+                height: 25,
+                type: type,
+                color: getPowerUpColor(type),
+                speed: 2
+            };
+        }
+
+        function getPowerUpColor(type) {
+            const colors = {
+                shield: '#e6d38a',
+                rapidFire: '#ffcc00',
+                tripleShot: '#cc9900',
+                bomb: '#ff4500',
+                laser: '#fff176',
+                timeFreeze: '#ffd9a8',
+                apocalypse: '#ff00ff',
+                piercing: '#c0c0c0',
+                invincible: '#ffff00',
+                doubleScore: '#00ff88'
+            };
+            return colors[type];
+        }
+
+        function getPowerUpSymbol(type) {
+            const symbols = {
+                shield: '🛡️',
+                rapidFire: '⚡',
+                tripleShot: '🔺',
+                bomb: '💣',
+                laser: '📡',
+                timeFreeze: '⏰',
+                apocalypse: '💀',
+                piercing: '🗡️',
+                invincible: '🌟',
+                doubleScore: '📈'
+            };
+            return symbols[type];
+        }
+
+        function shoot() {
+            const baseDamage = 10;
+            
+            if (powerUps.tripleShot.active) {
+                bullets.push({x: ship.x - 15, y: ship.y - 40, vx: 0, vy: -12, color: '#cc9900', damage: baseDamage * 2});
+                bullets.push({x: ship.x, y: ship.y - 40, vx: 0, vy: -12, color: '#cc9900', damage: baseDamage * 2});
+                bullets.push({x: ship.x + 15, y: ship.y - 40, vx: 0, vy: -12, color: '#cc9900', damage: baseDamage * 2});
+            } else if (powerUps.laser.active) {
+                bullets.push({x: ship.x, y: ship.y - 40, vx: 0, vy: -18, color: '#fff176', width: 8, height: 25, damage: baseDamage * 3});
+            } else if (powerUps.apocalypse.active) {
+                bullets.push({x: ship.x - 10, y: ship.y - 40, vx: -1, vy: -14, color: '#ff00ff', damage: baseDamage * 4});
+                bullets.push({x: ship.x, y: ship.y - 40, vx: 0, vy: -14, color: '#ff00ff', damage: baseDamage * 4});
+                bullets.push({x: ship.x + 10, y: ship.y - 40, vx: 1, vy: -14, color: '#ff00ff', damage: baseDamage * 4});
+            } else {
+                const bulletSpeed = powerUps.rapidFire.active ? -14 : -10;
+                if (shipUpgrades.doubleShot.unlocked) {
+                    if (doubleShotMode === 'sequential') {
+                        bullets.push({x: ship.x, y: ship.y - 40, vx: 0, vy: bulletSpeed, color: '#ffcc00', width: 5, height: 15, damage: baseDamage});
+                        bullets.push({x: ship.x, y: ship.y - 22, vx: 0, vy: bulletSpeed, color: '#ffcc00', width: 5, height: 15, damage: baseDamage});
+                    } else {
+                        bullets.push({x: ship.x - 8, y: ship.y - 40, vx: 0, vy: bulletSpeed, color: '#ffcc00', width: 5, height: 15, damage: baseDamage});
+                        bullets.push({x: ship.x + 8, y: ship.y - 40, vx: 0, vy: bulletSpeed, color: '#ffcc00', width: 5, height: 15, damage: baseDamage});
+                    }
+                } else {
+                    bullets.push({x: ship.x, y: ship.y - 40, vx: 0, vy: bulletSpeed, color: '#ffcc00', width: 5, height: 15, damage: baseDamage});
+                }
+            }
+        }
+
+        function createExplosion(x, y, size, color) {
+            explosions.push({
+                x: x,
+                y: y,
+                size: size,
+                color: color,
+                life: 1.0,
+                maxLife: 1.0
+            });
+        }
+
+        function drawShip() {
+            ctx.fillStyle = ship.color;
+            ctx.beginPath();
+            ctx.moveTo(ship.x, ship.y - ship.height);
+            ctx.lineTo(ship.x - ship.width/2, ship.y);
+            ctx.lineTo(ship.x + ship.width/2, ship.y);
+            ctx.closePath();
+            ctx.fill();
+
+            if (powerUps.rapidFire.active) {
+                ctx.fillStyle = '#ffcc00';
+                ctx.beginPath();
+                ctx.moveTo(ship.x - 10, ship.y);
+                ctx.lineTo(ship.x, ship.y + 15);
+                ctx.lineTo(ship.x + 10, ship.y);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            if (ship.shield) {
+                ctx.strokeStyle = powerUps.apocalypse.active ? '#ff00ff' : '#e6d38a';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(ship.x, ship.y - ship.height/2, ship.width, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+
+            if (powerUps.invincible.active) {
+                ctx.strokeStyle = '#ffff00';
+                ctx.lineWidth = 2;
+                ctx.globalAlpha = 0.6 + Math.sin(Date.now() / 100) * 0.4;
+                ctx.beginPath();
+                ctx.arc(ship.x, ship.y - ship.height/2, ship.width * 1.3, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.globalAlpha = 1.0;
+            }
+        }
+
+        function drawMeteors() {
+            meteors.forEach(meteor => {
+                if (meteor.invisible && Math.sin(Date.now() / 200) > 0) {
+                    ctx.globalAlpha = 0.3;
+                } else {
+                    ctx.globalAlpha = 1.0;
+                }
+                
+                ctx.fillStyle = meteor.color;
+                ctx.beginPath();
+                ctx.arc(meteor.x, meteor.y, meteor.size, 0, Math.PI * 2);
+                ctx.fill();
+
+                if (meteor.type === 'LAVA') {
+                    ctx.fillStyle = '#ff4500';
+                    ctx.beginPath();
+                    ctx.arc(meteor.x, meteor.y, meteor.size * 0.6, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                if (meteor.type === 'SPLIT') {
+                    ctx.strokeStyle = '#1a0a00';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(meteor.x - meteor.size * 0.6, meteor.y);
+                    ctx.lineTo(meteor.x + meteor.size * 0.6, meteor.y);
+                    ctx.stroke();
+                }
+
+                ctx.globalAlpha = 1.0;
+            });
+        }
+
+        function drawBoss() {
+            if (!bossActive) return;
+
+            ctx.fillStyle = boss.color;
+            
+            if (currentBoss === 'INFERNO_DRAGON') {
+                ctx.beginPath();
+                ctx.ellipse(boss.x, boss.y, boss.width/2, boss.height/2, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#ff4500';
+                ctx.beginPath();
+                ctx.ellipse(boss.x, boss.y + boss.height/3, boss.width/3, boss.height/4, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+            } else if (currentBoss === 'DARK_LORD') {
+                ctx.beginPath();
+                ctx.moveTo(boss.x, boss.y - boss.height/2);
+                ctx.lineTo(boss.x - boss.width/2, boss.y + boss.height/2);
+                ctx.lineTo(boss.x + boss.width/2, boss.y + boss.height/2);
+                ctx.closePath();
+                ctx.fill();
+                
+            } else {
+                ctx.fillRect(boss.x - boss.width/2, boss.y - boss.height/2, boss.width, boss.height);
+            }
+        }
+
+        function drawPowerUps() {
+            powerUpItems.forEach(powerUp => {
+                ctx.fillStyle = powerUp.color;
+                ctx.fillRect(powerUp.x, powerUp.y, powerUp.width, powerUp.height);
+                
+                ctx.fillStyle = '#ffffff';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(getPowerUpSymbol(powerUp.type), powerUp.x + powerUp.width/2, powerUp.y + powerUp.height/2 + 4);
+                ctx.textAlign = 'left';
+            });
+        }
+
+        function drawBullets() {
+            bullets.forEach(bullet => {
+                ctx.fillStyle = bullet.color;
+                if (bullet.width && bullet.height) {
+                    ctx.fillRect(bullet.x - bullet.width/2, bullet.y, bullet.width, bullet.height);
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(bullet.x, bullet.y, 3, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+        }
+
+        function drawExplosions() {
+            explosions.forEach((explosion, index) => {
+                const progress = explosion.life / explosion.maxLife;
+                const size = explosion.size * (1 - progress);
+                
+                ctx.globalAlpha = progress;
+                ctx.fillStyle = explosion.color;
+                ctx.beginPath();
+                ctx.arc(explosion.x, explosion.y, size, 0, Math.PI * 2);
+                ctx.fill();
+                
+                explosion.life -= 0.05;
+                if (explosion.life <= 0) {
+                    explosions.splice(index, 1);
+                }
+            });
+            ctx.globalAlpha = 1.0;
+        }
+
+        function drawLives() {
+            const lang = texts[language];
+            livesDisplay.textContent = lang.lives + '❤️'.repeat(lives);
+        }
+
+        function drawScore() {
+            const lang = texts[language];
+            scoreDisplay.textContent = lang.score + score;
+        }
+
+        function addGold(amount) {
+            gold += ultimatePass.owned ? Math.floor(amount * ultimatePass.goldMultiplier) : amount;
+        }
+
+        function drawGold() {
+            const lang = texts[language];
+            const goldText = lang.gold + gold;
+            goldDisplay.textContent = goldText;
+            menuGoldDisplay.textContent = goldText;
+            goldDisplayShop.textContent = goldText;
+        }
+
+        function addDiamonds(amount) {
+            diamonds += amount;
+            drawDiamonds();
+            saveGameData();
+        }
+
+        function drawDiamonds() {
+            const diamondsText = '💎 ' + (language === 'Turkish' ? 'Elmas: ' : 'Diamonds: ') + diamonds;
+            menuDiamondsDisplay.textContent = diamondsText;
+            diamondsDisplayShop.textContent = diamondsText;
+        }
+
+        function drawPowerDisplay() {
+            const lang = texts[language];
+            let powerText = lang.powers;
+            
+            activePowerUps.forEach(power => {
+                powerText += getPowerUpSymbol(power) + ' ';
+            });
+            
+            powerDisplay.textContent = powerText;
+        }
+
+        function saveGameData() {
+            const gameData = {
+                gold: gold,
+                diamonds: diamonds,
+                playerLevel: playerLevel,
+                playerXP: playerXP,
+                ultimateBoxes: ultimateBoxes,
+                currentShipSkin: currentShipSkin,
+                currentMeteorSkin: currentMeteorSkin,
+                currentUniverse: currentUniverse,
+                shipSkins: {},
+                meteorSkins: {},
+                universes: {},
+                shipUpgrades: {},
+                language: language,
+                gameMode: gameMode,
+                agentUnlocked: agent.unlocked,
+                agent2Unlocked: agent2.unlocked,
+                buddyUnlocked: buddy.unlocked,
+                buddy2Unlocked: buddy2.unlocked,
+                ultimatePassOwned: ultimatePass.owned,
+                doubleShotMode: doubleShotMode
+            };
+
+            Object.keys(shipUpgrades).forEach(key => {
+                gameData.shipUpgrades[key] = {
+                    unlocked: shipUpgrades[key].unlocked
+                };
+            });
+
+            Object.keys(shipSkins).forEach(key => {
+                gameData.shipSkins[key] = {
+                    unlocked: shipSkins[key].unlocked
+                };
+            });
+
+            Object.keys(meteorSkins).forEach(key => {
+                gameData.meteorSkins[key] = {
+                    unlocked: meteorSkins[key].unlocked
+                };
+            });
+
+            Object.keys(universes).forEach(key => {
+                gameData.universes[key] = {
+                    unlocked: universes[key].unlocked
+                };
+            });
+
+            localStorage.setItem('ultimateMeteor3Data', JSON.stringify(gameData));
+        }
+
+        function loadGameData() {
+            const savedData = localStorage.getItem('ultimateMeteor3Data');
+            if (savedData) {
+                try {
+                    const gameData = JSON.parse(savedData);
+                    
+                    gold = gameData.gold || 0;
+                    diamonds = gameData.diamonds || 0;
+                    playerLevel = gameData.playerLevel || 1;
+                    playerXP = gameData.playerXP || 0;
+                    ultimateBoxes = gameData.ultimateBoxes || 0;
+                    currentShipSkin = gameData.currentShipSkin || 'default';
+                    currentMeteorSkin = gameData.currentMeteorSkin || 'default';
+                    currentUniverse = gameData.currentUniverse || 'default';
+                    language = gameData.language || 'Turkish';
+                    gameMode = gameData.gameMode || 'Easy';
+                    agent.unlocked = gameData.agentUnlocked || false;
+                    agent2.unlocked = gameData.agent2Unlocked || false;
+                    buddy.unlocked = gameData.buddyUnlocked || false;
+                    buddy2.unlocked = gameData.buddy2Unlocked || false;
+                    ultimatePass.owned = gameData.ultimatePassOwned || false;
+                    doubleShotMode = gameData.doubleShotMode || 'side';
+                    
+                    if (gameData.shipSkins) {
+                        Object.keys(gameData.shipSkins).forEach(key => {
+                            if (shipSkins[key]) {
+                                shipSkins[key].unlocked = gameData.shipSkins[key].unlocked || false;
+                            }
+                        });
+                    }
+                    
+                    if (gameData.meteorSkins) {
+                        Object.keys(gameData.meteorSkins).forEach(key => {
+                            if (meteorSkins[key]) {
+                                meteorSkins[key].unlocked = gameData.meteorSkins[key].unlocked || false;
+                            }
+                        });
+                    }
+
+                    if (gameData.universes) {
+                        Object.keys(gameData.universes).forEach(key => {
+                            if (universes[key]) {
+                                universes[key].unlocked = gameData.universes[key].unlocked || false;
+                            }
+                        });
+                    }
+
+                    if (gameData.shipUpgrades) {
+                        Object.keys(gameData.shipUpgrades).forEach(key => {
+                            if (shipUpgrades[key]) {
+                                shipUpgrades[key].unlocked = gameData.shipUpgrades[key].unlocked || false;
+                            }
+                        });
+                    }
+                    
+                    ship.color = shipSkins[currentShipSkin].color;
+
+                    if (ultimatePass.owned) {
+                        applyUltimatePassBenefits();
+                    }
+                    
+                } catch (error) {
+                    console.error('Oyun verisi yüklenirken hata:', error);
+                }
+            }
+        }
+
+        function applyUltimatePassBenefits() {
+            agent.unlocked = true;
+            buddy.unlocked = true;
+            agent.maxCooldown = Math.floor(1800 * ultimatePass.cooldownReduction);
+            buddy.maxCooldown = Math.floor(1800 * ultimatePass.cooldownReduction);
+            shipSkins.ultimate.unlocked = true;
+            Object.keys(universes).forEach(key => {
+                universes[key].unlocked = true;
+            });
+            ultimateBadge.style.display = 'block';
+        }
+
+        function setupShop() {
+            const shopItems = document.getElementById('shopItems');
+            shopItems.innerHTML = '';
+
+            const lang = texts[language];
+
+            // ULTIMATE PASS Bölümü (her zaman en üstte)
+            const ultimateItem = document.createElement('div');
+            ultimateItem.className = 'ultimate-pass-item';
+            ultimateItem.innerHTML = `
+                <div class="ultimate-pass-title">${lang.ultimatePassTitle}</div>
+                <div style="font-size: 0.85rem; color: #ffe9b3; position: relative; z-index: 1;">${lang.ultimatePassSubtitle}</div>
+                <div class="ultimate-pass-perks">${lang.ultimatePassPerks}</div>
+                ${!ultimatePass.owned ? `
+                    <div class="price-tag" style="color: #FFD700; font-size: 1.1rem;">${lang.price} ${ultimatePass.price} 💰</div>
+                    <button class="ultimate-pass-btn" onclick="buyUltimatePass()">${lang.ultimatePassBuy}</button>
+                ` : `
+                    <div class="ultimate-pass-btn" style="cursor: default;">${lang.ultimatePassOwned}</div>
+                `}
+            `;
+            shopItems.appendChild(ultimateItem);
+
+            // Evrenler Bölümü
+            const universeHeader = document.createElement('h3');
+            universeHeader.textContent = lang.universes;
+            universeHeader.style.color = '#ffcc00';
+            universeHeader.style.textAlign = 'center';
+            universeHeader.style.marginBottom = '1rem';
+            shopItems.appendChild(universeHeader);
+
+            Object.keys(universes).forEach(universeKey => {
+                const universe = universes[universeKey];
+                const item = document.createElement('div');
+                item.className = `shop-item ${universe.unlocked ? 'unlocked' : 'locked'}`;
+                
+                const isCurrent = currentUniverse === universeKey;
+                const isOwned = universe.unlocked;
+                
+                // Evren önizleme arkaplanı
+                const previewStyle = universeKey === 'earth' ? 'background: linear-gradient(45deg, #001122, #004466)' :
+                                  universeKey === 'apocalypse' ? 'background: linear-gradient(45deg, #330000, #660000)' :
+                                  universeKey === 'volcano' ? 'background: linear-gradient(45deg, #330a00, #ff4500)' :
+                                  universeKey === 'blackhole' ? 'background: linear-gradient(45deg, #000000, #2b0a40)' :
+                                  universeKey === 'ice' ? 'background: linear-gradient(45deg, #001a33, #66d9ff)' :
+                                  'background: linear-gradient(45deg, #1a0a00, #331100)';
+                
+                item.innerHTML = `
+                    <h3>${universe.name[language]}</h3>
+                    <div class="universe-preview" style="${previewStyle}"></div>
+                    ${!isOwned ? `<div class="price-tag">${lang.price} ${universe.price} 💰</div>` : ''}
+                    <div style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.5rem;">
+                        ${!isOwned ? 
+                            `<button onclick="buyUniverse('${universeKey}')" style="
+                                background: #ffcc00;
+                                color: white;
+                                border: none;
+                                padding: 0.5rem 1rem;
+                                border-radius: 10px;
+                                cursor: pointer;
+                                font-weight: bold;
+                                flex: 1;
+                            ">${lang.buy}</button>` : 
+                            `<button onclick="equipUniverse('${universeKey}')" style="
+                                background: ${isCurrent ? '#fff176' : '#e6d38a'};
+                                color: ${isCurrent ? 'black' : 'white'};
+                                border: none;
+                                padding: 0.5rem 1rem;
+                                border-radius: 10px;
+                                cursor: pointer;
+                                font-weight: bold;
+                                flex: 1;
+                            ">${isCurrent ? '✅ ' + (language === 'Turkish' ? 'AKTİF' : 'ACTIVE') : (language === 'Turkish' ? 'KULLAN' : 'EQUIP')}</button>`
+                        }
+                    </div>
+                    ${isCurrent ? '<div style="color: #fff176; margin-top: 0.5rem; font-weight: bold;">✓ ' + (language === 'Turkish' ? 'Şu an kullanılıyor' : 'Currently equipped') + '</div>' : ''}
+                `;
+                shopItems.appendChild(item);
+            });
+
+            // Gemi Skinleri Bölümü
+            const shipHeader = document.createElement('h3');
+            shipHeader.textContent = lang.shipSkins;
+            shipHeader.style.color = '#ffcc00';
+            shipHeader.style.textAlign = 'center';
+            shipHeader.style.marginTop = '2rem';
+            shipHeader.style.marginBottom = '1rem';
+            shopItems.appendChild(shipHeader);
+
+            Object.keys(shipSkins).forEach(skinKey => {
+                const skin = shipSkins[skinKey];
+                if (skin.exclusive && !skin.unlocked) return; // Sadece Ultimate Pass ile açılır, normal markette görünmez
+
+                const item = document.createElement('div');
+                item.className = `shop-item ${skin.unlocked ? 'unlocked' : 'locked'}`;
+                
+                const isCurrent = currentShipSkin === skinKey;
+                const isOwned = skin.unlocked;
+                
+                item.innerHTML = `
+                    <h3>${skin.name[language]}</h3>
+                    <div class="skin-preview">
+                        <div class="preview-ship" style="--ship-color: ${skin.color}"></div>
+                    </div>
+                    ${!isOwned ? `<div class="price-tag">${lang.price} ${skin.price} 💰</div>` : ''}
+                    <div style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.5rem;">
+                        ${!isOwned ? 
+                            `<button onclick="buyItem('ship', '${skinKey}')" style="
+                                background: #ffcc00;
+                                color: white;
+                                border: none;
+                                padding: 0.5rem 1rem;
+                                border-radius: 10px;
+                                cursor: pointer;
+                                font-weight: bold;
+                                flex: 1;
+                            ">${lang.buy}</button>` : 
+                            `<button onclick="equipItem('ship', '${skinKey}')" style="
+                                background: ${isCurrent ? '#fff176' : '#e6d38a'};
+                                color: ${isCurrent ? 'black' : 'white'};
+                                border: none;
+                                padding: 0.5rem 1rem;
+                                border-radius: 10px;
+                                cursor: pointer;
+                                font-weight: bold;
+                                flex: 1;
+                            ">${isCurrent ? '✅ ' + (language === 'Turkish' ? 'AKTİF' : 'ACTIVE') : (language === 'Turkish' ? 'KULLAN' : 'EQUIP')}</button>`
+                        }
+                    </div>
+                    ${isCurrent ? '<div style="color: #fff176; margin-top: 0.5rem; font-weight: bold;">✓ ' + (language === 'Turkish' ? 'Şu an kullanılıyor' : 'Currently equipped') + '</div>' : ''}
+                `;
+                shopItems.appendChild(item);
+            });
+
+            // Meteor Skinleri Bölümü
+            const meteorHeader = document.createElement('h3');
+            meteorHeader.textContent = lang.meteorSkins;
+            meteorHeader.style.color = '#ffcc00';
+            meteorHeader.style.textAlign = 'center';
+            meteorHeader.style.marginTop = '2rem';
+            meteorHeader.style.marginBottom = '1rem';
+            shopItems.appendChild(meteorHeader);
+
+            Object.keys(meteorSkins).forEach(skinKey => {
+                const skin = meteorSkins[skinKey];
+                const item = document.createElement('div');
+                item.className = `shop-item ${skin.unlocked ? 'unlocked' : 'locked'}`;
+                
+                const isCurrent = currentMeteorSkin === skinKey;
+                const isOwned = skin.unlocked;
+                
+                item.innerHTML = `
+                    <h3>${skin.name[language]}</h3>
+                    <div class="skin-preview">
+                        <div class="preview-meteor" style="--meteor-color: ${skin.color}"></div>
+                    </div>
+                    ${!isOwned ? `<div class="price-tag">${lang.price} ${skin.price} 💰</div>` : ''}
+                    <div style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.5rem;">
+                        ${!isOwned ? 
+                            `<button onclick="buyItem('meteor', '${skinKey}')" style="
+                                background: #ffcc00;
+                                color: white;
+                                border: none;
+                                padding: 0.5rem 1rem;
+                                border-radius: 10px;
+                                cursor: pointer;
+                                font-weight: bold;
+                                flex: 1;
+                            ">${lang.buy}</button>` : 
+                            `<button onclick="equipItem('meteor', '${skinKey}')" style="
+                                background: ${isCurrent ? '#fff176' : '#e6d38a'};
+                                color: ${isCurrent ? 'black' : 'white'};
+                                border: none;
+                                padding: 0.5rem 1rem;
+                                border-radius: 10px;
+                                cursor: pointer;
+                                font-weight: bold;
+                                flex: 1;
+                            ">${isCurrent ? '✅ ' + (language === 'Turkish' ? 'AKTİF' : 'ACTIVE') : (language === 'Turkish' ? 'KULLAN' : 'EQUIP')}</button>`
+                        }
+                    </div>
+                    ${isCurrent ? '<div style="color: #fff176; margin-top: 0.5rem; font-weight: bold;">✓ ' + (language === 'Turkish' ? 'Şu an kullanılıyor' : 'Currently equipped') + '</div>' : ''}
+                `;
+                shopItems.appendChild(item);
+            });
+
+            // YARDIMCI SİSTEMLER Bölümü
+            const helperHeader = document.createElement('h3');
+            helperHeader.textContent = lang.helperSystems;
+            helperHeader.style.color = '#ffcc00';
+            helperHeader.style.textAlign = 'center';
+            helperHeader.style.marginTop = '2rem';
+            helperHeader.style.marginBottom = '1rem';
+            shopItems.appendChild(helperHeader);
+
+            // Agent Item
+            const agentItem = document.createElement('div');
+            agentItem.className = `shop-item ${agent.unlocked ? 'unlocked' : 'locked'}`;
+            
+            agentItem.innerHTML = `
+                ${agent.unlocked ? '<div class="system-active-badge">✓ ' + (language === 'Turkish' ? 'Sistem aktif' : 'System active') + '</div>' : ''}
+                <h3>🛰️ ${lang.agentDescription}</h3>
+                <div style="margin: 0.5rem 0; color: #ffd9a8; font-size: 0.9rem;">
+                    ${language === 'Turkish' ? 
+                     '• 30 saniye bekleme süresi<br>• 10 meteoru otomatik yok eder<br>• Q tuşu veya buton ile aktifleştirilir' :
+                     '• 30 second cooldown<br>• Destroys 10 meteors automatically<br>• Activated with Q key or button'}
+                </div>
+                ${agent.unlocked ? `<div style="margin: 0.5rem 0; color: #fff59d; font-size: 0.9rem; border-top: 1px solid rgba(255, 204, 0,0.3); padding-top: 0.5rem;">
+                    🤖 <strong>Agent 2.0</strong><br>
+                    ${language === 'Turkish' ?
+                     '• 10 meteor yok ettikten sonra ikiye bölünür<br>• 5 saniye boyunca önüne gelen meteorları ve varsa boss\'u vurur<br>• Hasarı oyuncu ile aynıdır' :
+                     '• Splits into two after destroying 10 meteors<br>• Hits meteors and the boss (if present) for 5 seconds<br>• Same damage as the player'}
+                </div>` : ''}
+                ${!agent.unlocked ? `<div class="price-tag">${lang.price} ${agent.price} 💰</div>` : (!agent2.unlocked ? `<div class="price-tag">${lang.price} ${agent2.price} 💎</div>` : '')}
+                <div style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.5rem;">
+                    ${!agent.unlocked ? 
+                        `<button onclick="buyAgent()" style="
+                            background: #ffcc00;
+                            color: white;
+                            border: none;
+                            padding: 0.5rem 1rem;
+                            border-radius: 10px;
+                            cursor: pointer;
+                            font-weight: bold;
+                            flex: 1;
+                        ">${lang.buy}</button>` : 
+                        (!agent2.unlocked ?
+                            `<button onclick="buyAgent2()" style="
+                                background: #00c896;
+                                color: white;
+                                border: none;
+                                padding: 0.5rem 1rem;
+                                border-radius: 10px;
+                                cursor: pointer;
+                                font-weight: bold;
+                                flex: 1;
+                            ">⬆️ ${language === 'Turkish' ? 'Yükselt' : 'Upgrade'}</button>` :
+                            `<div style="
+                                background: #fff176;
+                                color: black;
+                                border: none;
+                                padding: 0.5rem 1rem;
+                                border-radius: 10px;
+                                font-weight: bold;
+                                flex: 1;
+                            ">✅ Agent 2.0 ${language === 'Turkish' ? 'AKTİF' : 'ACTIVE'}</div>`
+                        )
+                    }
+                </div>
+            `;
+            shopItems.appendChild(agentItem);
+
+            // Buddy Item
+            const buddyItem = document.createElement('div');
+            buddyItem.className = `shop-item ${buddy.unlocked ? 'unlocked' : 'locked'}`;
+
+            buddyItem.innerHTML = `
+                ${buddy.unlocked ? '<div class="system-active-badge">✓ ' + (language === 'Turkish' ? 'Sistem aktif' : 'System active') + '</div>' : ''}
+                <h3>🧲 ${lang.buddyDescription}</h3>
+                <div style="margin: 0.5rem 0; color: #ffd9a8; font-size: 0.9rem;">
+                    ${language === 'Turkish' ? 
+                     '• 30 saniye bekleme süresi<br>• 5 saniye boyunca güçleri oyuncuya çeker<br>• E tuşu veya buton ile aktifleştirilir' :
+                     '• 30 second cooldown<br>• Pulls power-ups to the player for 5 seconds<br>• Activated with E key or button'}
+                </div>
+                ${buddy.unlocked ? `<div style="margin: 0.5rem 0; color: #fff59d; font-size: 0.9rem; border-top: 1px solid rgba(255, 204, 0,0.3); padding-top: 0.5rem;">
+                    🧲 <strong>Buddy 2.0</strong><br>
+                    ${language === 'Turkish' ?
+                     '• Güçleri çekme süresi 5 saniyeden 10 saniyeye çıkar' :
+                     '• Extends the power-up pull duration from 5 to 10 seconds'}
+                </div>` : ''}
+                ${!buddy.unlocked ? `<div class="price-tag">${lang.price} ${buddy.price} 💰</div>` : (!buddy2.unlocked ? `<div class="price-tag">${lang.price} ${buddy2.price} 💎</div>` : '')}
+                <div style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.5rem;">
+                    ${!buddy.unlocked ? 
+                        `<button onclick="buyBuddy()" style="
+                            background: #ffcc00;
+                            color: white;
+                            border: none;
+                            padding: 0.5rem 1rem;
+                            border-radius: 10px;
+                            cursor: pointer;
+                            font-weight: bold;
+                            flex: 1;
+                        ">${lang.buy}</button>` : 
+                        (!buddy2.unlocked ?
+                            `<button onclick="buyBuddy2()" style="
+                                background: #00c896;
+                                color: white;
+                                border: none;
+                                padding: 0.5rem 1rem;
+                                border-radius: 10px;
+                                cursor: pointer;
+                                font-weight: bold;
+                                flex: 1;
+                            ">⬆️ ${language === 'Turkish' ? 'Yükselt' : 'Upgrade'}</button>` :
+                            `<div style="
+                                background: #fff176;
+                                color: black;
+                                border: none;
+                                padding: 0.5rem 1rem;
+                                border-radius: 10px;
+                                font-weight: bold;
+                                flex: 1;
+                            ">✅ Buddy 2.0 ${language === 'Turkish' ? 'AKTİF' : 'ACTIVE'}</div>`
+                        )
+                    }
+                </div>
+            `;
+            shopItems.appendChild(buddyItem);
+
+            // GEMİ GÜÇLENDİRMELERİ Bölümü (Elmas ile satın alınır)
+            const upgradesHeader = document.createElement('h3');
+            upgradesHeader.textContent = language === 'Turkish' ? '💎 GEMİ GÜÇLENDİRMELERİ' : '💎 SHIP UPGRADES';
+            upgradesHeader.style.color = '#fff59d';
+            upgradesHeader.style.textAlign = 'center';
+            upgradesHeader.style.marginTop = '2rem';
+            upgradesHeader.style.marginBottom = '1rem';
+            shopItems.appendChild(upgradesHeader);
+
+            Object.keys(shipUpgrades).forEach(upgradeKey => {
+                const upgrade = shipUpgrades[upgradeKey];
+                const item = document.createElement('div');
+                item.className = `shop-item ${upgrade.unlocked ? 'unlocked' : 'locked'}`;
+                item.style.borderColor = upgrade.unlocked ? '#fff176' : '#fff59d';
+
+                item.innerHTML = `
+                    <h3>${upgrade.icon} ${upgrade.name[language]}</h3>
+                    <div style="margin: 0.5rem 0; color: #d9ffff; font-size: 0.9rem;">
+                        ${upgrade.desc[language]}
+                    </div>
+                    ${!upgrade.unlocked ? `<div class="price-tag" style="color: #fff59d;">${lang.price} ${upgrade.price} 💎</div>` : ''}
+                    <div style="display: flex; gap: 0.5rem; justify-content: center; margin-top: 0.5rem;">
+                        ${!upgrade.unlocked ?
+                            `<button onclick="buyShipUpgrade('${upgradeKey}')" style="
+                                background: #fff59d;
+                                color: black;
+                                border: none;
+                                padding: 0.5rem 1rem;
+                                border-radius: 10px;
+                                cursor: pointer;
+                                font-weight: bold;
+                                flex: 1;
+                            ">${lang.buy}</button>` :
+                            `<div style="
+                                background: #fff176;
+                                color: black;
+                                border: none;
+                                padding: 0.5rem 1rem;
+                                border-radius: 10px;
+                                font-weight: bold;
+                                flex: 1;
+                            ">✅ ${language === 'Turkish' ? 'SATIN ALINDI' : 'PURCHASED'}</div>`
+                        }
+                    </div>
+                    ${upgrade.unlocked ? '<div style="color: #fff176; margin-top: 0.5rem; font-weight: bold;">✓ ' + (language === 'Turkish' ? 'Güçlendirme aktif' : 'Upgrade active') + '</div>' : ''}
+                    ${upgrade.unlocked && upgradeKey === 'doubleShot' ? `
+                        <div style="margin-top: 0.8rem; border-top: 1px solid rgba(255, 245, 157,0.3); padding-top: 0.6rem;">
+                            <div style="font-size: 0.85rem; color: #d9ffff; margin-bottom: 0.4rem;">
+                                ${language === 'Turkish' ? 'Ateş modu:' : 'Fire mode:'}
+                            </div>
+                            <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                                <button onclick="setDoubleShotMode('side')" style="
+                                    background: ${doubleShotMode === 'side' ? '#ffcc00' : 'rgba(255, 204, 0,0.15)'};
+                                    color: ${doubleShotMode === 'side' ? 'black' : '#ffcc00'};
+                                    border: 1px solid #ffcc00;
+                                    padding: 0.4rem 0.8rem;
+                                    border-radius: 10px;
+                                    cursor: pointer;
+                                    font-weight: bold;
+                                    flex: 1;
+                                    font-size: 0.8rem;
+                                ">${language === 'Turkish' ? '↔ Yan Yana' : '↔ Side by Side'}</button>
+                                <button onclick="setDoubleShotMode('sequential')" style="
+                                    background: ${doubleShotMode === 'sequential' ? '#ffcc00' : 'rgba(255, 204, 0,0.15)'};
+                                    color: ${doubleShotMode === 'sequential' ? 'black' : '#ffcc00'};
+                                    border: 1px solid #ffcc00;
+                                    padding: 0.4rem 0.8rem;
+                                    border-radius: 10px;
+                                    cursor: pointer;
+                                    font-weight: bold;
+                                    flex: 1;
+                                    font-size: 0.8rem;
+                                ">${language === 'Turkish' ? '↕ Arka Arkaya' : '↕ In a Row'}</button>
+                            </div>
+                        </div>
+                    ` : ''}
+                `;
+                shopItems.appendChild(item);
+            });
+
+            shopTitle.textContent = lang.shopTitle;
+        }
+
+        function buyUltimatePass() {
+            const lang = texts[language];
+
+            if (ultimatePass.owned) {
+                showToast(lang.alreadyOwned, 'info');
+                return;
+            }
+
+            if (gold >= ultimatePass.price) {
+                gold -= ultimatePass.price;
+                ultimatePass.owned = true;
+                ultimateBoxes += 10;
+
+                applyUltimatePassBenefits();
+                drawGold();
+                drawBoxes();
+                setupShop();
+                saveGameData();
+
+                showToast(`👑 ${lang.ultimatePassSuccess}`);
+            } else {
+                showToast(lang.notEnoughGold, 'error');
+            }
+        }
+
+        function buyAgent() {
+            const lang = texts[language];
+            
+            if (agent.unlocked) {
+                showToast(lang.alreadyOwned, 'info');
+                return;
+            }
+            
+            if (gold >= agent.price) {
+                gold -= agent.price;
+                agent.unlocked = true;
+                
+                drawGold();
+                setupShop();
+                saveGameData();
+                
+                showToast(`✅ ${lang.agentDescription}${lang.purchaseSuccess}`);
+            } else {
+                showToast(lang.notEnoughGold, 'error');
+            }
+        }
+
+        function buyAgent2() {
+            const lang = texts[language];
+
+            if (!agent.unlocked) return;
+
+            if (agent2.unlocked) {
+                showToast(lang.alreadyOwned, 'info');
+                return;
+            }
+
+            if (diamonds >= agent2.price) {
+                diamonds -= agent2.price;
+                agent2.unlocked = true;
+
+                drawDiamonds();
+                setupShop();
+                saveGameData();
+
+                showToast(`✅ Agent 2.0${lang.purchaseSuccess}`);
+            } else {
+                showToast(lang.notEnoughDiamonds, 'error');
+            }
+        }
+
+        function buyBuddy() {
+            const lang = texts[language];
+
+            if (buddy.unlocked) {
+                showToast(lang.alreadyOwned, 'info');
+                return;
+            }
+
+            if (gold >= buddy.price) {
+                gold -= buddy.price;
+                buddy.unlocked = true;
+
+                drawGold();
+                setupShop();
+                saveGameData();
+
+                showToast(`✅ ${lang.buddyDescription}${lang.purchaseSuccess}`);
+            } else {
+                showToast(lang.notEnoughGold, 'error');
+            }
+        }
+
+        function buyBuddy2() {
+            const lang = texts[language];
+
+            if (!buddy.unlocked) return;
+
+            if (buddy2.unlocked) {
+                showToast(lang.alreadyOwned, 'info');
+                return;
+            }
+
+            if (diamonds >= buddy2.price) {
+                diamonds -= buddy2.price;
+                buddy2.unlocked = true;
+
+                drawDiamonds();
+                setupShop();
+                saveGameData();
+
+                showToast(`✅ Buddy 2.0${lang.purchaseSuccess}`);
+            } else {
+                showToast(lang.notEnoughDiamonds, 'error');
+            }
+        }
+
+        function setDoubleShotMode(mode) {
+            doubleShotMode = mode;
+            saveGameData();
+            setupShop();
+        }
+
+        function buyShipUpgrade(upgradeKey) {
+            const upgrade = shipUpgrades[upgradeKey];
+            const lang = texts[language];
+
+            if (upgrade.unlocked) {
+                showToast(lang.alreadyOwned, 'info');
+                return;
+            }
+
+            if (diamonds >= upgrade.price) {
+                diamonds -= upgrade.price;
+                upgrade.unlocked = true;
+
+                drawDiamonds();
+                setupShop();
+                saveGameData();
+
+                showToast(`✅ ${upgrade.name[language]}${lang.purchaseSuccess}`);
+            } else {
+                showToast(lang.notEnoughDiamonds, 'error');
+            }
+        }
+
+        function buyUniverse(universeKey) {
+            const universe = universes[universeKey];
+            const lang = texts[language];
+            
+            if (universe.unlocked) {
+                showToast(lang.alreadyOwned, 'info');
+                return;
+            }
+            
+            if (gold >= universe.price) {
+                gold -= universe.price;
+                universe.unlocked = true;
+                
+                drawGold();
+                setupShop();
+                saveGameData();
+                
+                showToast(`✅ ${universe.name[language]}${lang.purchaseSuccess}`);
+            } else {
+                showToast(lang.notEnoughGold, 'error');
+            }
+        }
+
+        function equipUniverse(universeKey) {
+            const lang = texts[language];
+            currentUniverse = universeKey;
+            
+            setupShop();
+            saveGameData();
+            
+            showToast(`✅ ${universes[universeKey].name[language]}${lang.equipSuccess}`);
+        }
+
+        function buyItem(type, itemKey) {
+            const items = type === 'ship' ? shipSkins : meteorSkins;
+            const item = items[itemKey];
+            const lang = texts[language];
+            
+            if (item.unlocked) {
+                showToast(lang.alreadyOwned, 'info');
+                return;
+            }
+            
+            if (gold >= item.price) {
+                gold -= item.price;
+                item.unlocked = true;
+                
+                drawGold();
+                setupShop();
+                saveGameData();
+                
+                showToast(`✅ ${item.name[language]}${lang.purchaseSuccess}`);
+            } else {
+                showToast(lang.notEnoughGold, 'error');
+            }
+        }
+
+        function equipItem(type, itemKey) {
+            const lang = texts[language];
+            
+            if (type === 'ship') {
+                currentShipSkin = itemKey;
+                ship.color = shipSkins[itemKey].color;
+            } else {
+                currentMeteorSkin = itemKey;
+            }
+            
+            setupShop();
+            saveGameData();
+            
+            showToast(`✅ ${type === 'ship' ? shipSkins[itemKey].name[language] : meteorSkins[itemKey].name[language]}${lang.equipSuccess}`);
+        }
+
+        function setupGameModes() {
+            const modes = ['easy', 'normal', 'hard', 'extreme', 'impossible'];
+            
+            modes.forEach(mode => {
+                document.getElementById(mode + 'Mode').addEventListener('click', function() {
+                    gameMode = mode.charAt(0).toUpperCase() + mode.slice(1);
+                    
+                    document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    updateModeDescription();
+                    
+                    saveGameData();
+                });
+            });
+        }
+
+        function updateModeDescription() {
+            const lang = texts[language];
+            modeDescription.textContent = lang.modeDescriptions[gameMode.toLowerCase()];
+        }
+
+        document.getElementById('shopBtn').addEventListener('click', function() {
+            menu.style.display = 'none';
+            shopMenu.style.display = 'flex';
+            setupShop();
+            updateDevPanelShortcutVisibility();
+        });
+
+        document.getElementById('backToMenuBtn').addEventListener('click', function() {
+            shopMenu.style.display = 'none';
+            menu.style.display = 'flex';
+            updateDevPanelShortcutVisibility();
+        });
+
+        document.getElementById('shopBackBtn').addEventListener('click', function() {
+            shopMenu.style.display = 'none';
+            menu.style.display = 'flex';
+            updateDevPanelShortcutVisibility();
+        });
+
+        document.getElementById('language-btn').addEventListener('click', function() {
+            language = language === 'English' ? 'Turkish' : 'English';
+            updateUI();
+            saveGameData();
+        });
+
+        function updateUI() {
+            const lang = texts[language];
+            document.getElementById('startBtn').textContent = lang.start;
+            document.getElementById('shopBtn').textContent = lang.shop;
+            document.getElementById('easyMode').textContent = lang.easy;
+            document.getElementById('normalMode').textContent = lang.normal;
+            document.getElementById('hardMode').textContent = lang.hard;
+            document.getElementById('extremeMode').textContent = lang.extreme;
+            document.getElementById('impossibleMode').textContent = lang.impossible;
+            document.getElementById('language-btn').textContent = lang.language;
+            document.getElementById('backToMenuBtn').textContent = lang.backToMenu;
+            pauseMenuTitle.textContent = lang.pause;
+            resumeBtn.textContent = lang.resumeBtn;
+            homeBtnPause.textContent = lang.homeBtnPause;
+            
+            updateModeDescription();
+            drawLives();
+            drawScore();
+            drawGold();
+            drawDiamonds();
+            drawPowerDisplay();
+            drawLevel();
+            drawBoxes();
+            document.getElementById('openBoxBtn').textContent = lang.openBox;
+
+            if (ultimatePass.owned) {
+                ultimateBadge.textContent = lang.ultimateActiveMenu;
+                ultimateBadge.style.display = 'block';
+            }
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            drawSpaceBackground();
+            drawStars();
+            updateStars();
+            
+            if (gameActive) {
+                updateGame();
+                drawMeteors();
+                drawPowerUps();
+                drawBullets();
+                drawBoss();
+                drawExplosions();
+                drawAgentBeams();
+                drawAgentMiniShips();
+                drawShip();
+                updateAgent();
+                updateAgent2();
+                updateBuddy();
+            }
+            
+            requestAnimationFrame(gameLoop);
+        }
+
+        function drawSpaceBackground() {
+            const currentUniverseData = universes[currentUniverse];
+            ctx.fillStyle = currentUniverseData.background;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Evrene özel efektler
+            if (currentUniverse === 'earth') {
+                // Dünya evreni efektleri - mavi-yeşil tonlar
+                ctx.fillStyle = 'rgba(0, 100, 200, 0.1)';
+                ctx.beginPath();
+                ctx.arc(canvas.width * 0.2, canvas.height * 0.3, 80, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = 'rgba(0, 150, 100, 0.1)';
+                ctx.beginPath();
+                ctx.arc(canvas.width * 0.8, canvas.height * 0.2, 60, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (currentUniverse === 'apocalypse') {
+                // Kıyamet evreni efektleri - kırmızı-tonları
+                ctx.fillStyle = 'rgba(255, 0, 0, 0.1)';
+                ctx.beginPath();
+                ctx.arc(canvas.width * 0.2, canvas.height * 0.3, 80, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = 'rgba(200, 50, 0, 0.1)';
+                ctx.beginPath();
+                ctx.arc(canvas.width * 0.8, canvas.height * 0.2, 60, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (currentUniverse === 'volcano') {
+                // Volkan evreni efektleri - lav parıltısı
+                ctx.fillStyle = 'rgba(255, 69, 0, 0.15)';
+                ctx.beginPath();
+                ctx.arc(canvas.width * 0.2, canvas.height * 0.3, 80, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = 'rgba(255, 140, 0, 0.1)';
+                ctx.beginPath();
+                ctx.arc(canvas.width * 0.8, canvas.height * 0.2, 60, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (currentUniverse === 'blackhole') {
+                // Kara Delik evreni efektleri - girdap ve olay ufku parıltısı
+                ctx.fillStyle = 'rgba(20, 0, 40, 0.3)';
+                ctx.beginPath();
+                ctx.arc(canvas.width * 0.5, canvas.height * 0.4, 90, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = 'rgba(0, 255, 111, 0.08)';
+                ctx.beginPath();
+                ctx.arc(canvas.width * 0.5, canvas.height * 0.4, 55, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#000000';
+                ctx.beginPath();
+                ctx.arc(canvas.width * 0.5, canvas.height * 0.4, 30, 0, Math.PI * 2);
+                ctx.fill();
+            } else if (currentUniverse === 'ice') {
+                // Buz evreni efektleri - buz kristalleri parıltısı
+                ctx.fillStyle = 'rgba(102, 217, 255, 0.12)';
+                ctx.beginPath();
+                ctx.arc(canvas.width * 0.2, canvas.height * 0.3, 80, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = 'rgba(200, 240, 255, 0.1)';
+                ctx.beginPath();
+                ctx.arc(canvas.width * 0.8, canvas.height * 0.2, 60, 0, Math.PI * 2);
+                ctx.fill();
+            } else {
+                // Standart evren efektleri
+                ctx.fillStyle = 'rgba(255, 204, 0, 0.1)';
+                ctx.beginPath();
+                ctx.arc(canvas.width * 0.2, canvas.height * 0.3, 80, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = 'rgba(0, 255, 111, 0.1)';
+                ctx.beginPath();
+                ctx.arc(canvas.width * 0.8, canvas.height * 0.2, 60, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function togglePause() {
+            if (!gameActive) return;
+            gamePaused = !gamePaused;
+            pauseBtn.textContent = gamePaused ? "▶" : "⏸";
+
+            if (gamePaused) {
+                showPauseMenu();
+            } else {
+                hidePauseMenu();
+            }
+        }
+
+        function showPauseMenu() {
+            pauseMenu.classList.remove('pause-menu-hide');
+            pauseMenu.style.display = 'flex';
+            pauseMenu.classList.add('pause-menu-show');
+        }
+
+        function hidePauseMenu() {
+            pauseMenu.classList.remove('pause-menu-show');
+            pauseMenu.classList.add('pause-menu-hide');
+            setTimeout(() => {
+                pauseMenu.style.display = 'none';
+                pauseMenu.classList.remove('pause-menu-hide');
+            }, 300);
+        }
+
+        function goToMainMenuFromPause() {
+            hidePauseMenu();
+            setTimeout(() => {
+                gameActive = false;
+                gamePaused = false;
+                pauseBtn.textContent = '⏸';
+                menu.style.display = 'flex';
+                pauseBtn.style.display = 'none';
+                agentBtn.style.display = 'none';
+                agentCooldown.style.display = 'none';
+                buddyBtn.style.display = 'none';
+                buddyCooldown.style.display = 'none';
+                bossHealthBar.style.display = 'none';
+                bossName.style.display = 'none';
+                updateUI();
+                saveGameData();
+                updateDevPanelShortcutVisibility();
+            }, 300);
+        }
+
+        function endGame() {
+            gameActive = false;
+            gamePaused = false;
+            addXP(score);
+            menu.style.display = 'flex';
+            pauseBtn.style.display = 'none';
+            pauseBtn.textContent = '⏸';
+            pauseMenu.style.display = 'none';
+            pauseMenu.classList.remove('pause-menu-show', 'pause-menu-hide');
+            agentBtn.style.display = 'none';
+            agentCooldown.style.display = 'none';
+            buddyBtn.style.display = 'none';
+            buddyCooldown.style.display = 'none';
+            bossHealthBar.style.display = 'none';
+            bossName.style.display = 'none';
+            saveGameData();
+            updateDevPanelShortcutVisibility();
+        }
+
+        function updateGame() {
+            if (gamePaused) return;
+            
+            const timeScale = powerUps.timeFreeze.active ? 0.3 : 1.0;
+            
+            if (ship.moveLeft && ship.x - ship.width/2 > 0) {
+                ship.x -= ship.speed * timeScale;
+            }
+            if (ship.moveRight && ship.x + ship.width/2 < canvas.width) {
+                ship.x += ship.speed * timeScale;
+            }
+            
+            for (let index = meteors.length - 1; index >= 0; index--) {
+                const meteor = meteors[index];
+                meteor.y += meteor.speed * timeScale;
+
+                let meteorGone = false;
+
+                if (Math.abs(meteor.x - ship.x) < meteor.size + ship.width/2 && 
+                    Math.abs(meteor.y - ship.y) < meteor.size + ship.height/2) {
+                    
+                    if (powerUps.invincible.active) {
+                        createExplosion(meteor.x, meteor.y, meteor.size * 2, '#ffff00');
+                    } else if (ship.shield) {
+                        ship.shield = false;
+                        createExplosion(meteor.x, meteor.y, meteor.size * 2, '#e6d38a');
+                    } else {
+                        lives--;
+                        drawLives();
+                        createExplosion(ship.x, ship.y, 30, '#ffcc00');
+                        if (lives <= 0) {
+                            endGame();
+                        }
+                    }
+                    meteors.splice(index, 1);
+                    meteorGone = true;
+                }
+                
+                if (!meteorGone) {
+                    for (let bIndex = bullets.length - 1; bIndex >= 0; bIndex--) {
+                        const bullet = bullets[bIndex];
+                        if (bullet.vy < 0 && Math.abs(meteor.x - bullet.x) < meteor.size + 3 && 
+                            Math.abs(meteor.y - bullet.y) < meteor.size + 8) {
+                            
+                            meteor.health -= bullet.damage || 10;
+                            if (!powerUps.piercing.active) {
+                                bullets.splice(bIndex, 1);
+                            }
+                            createExplosion(meteor.x, meteor.y, 15, meteor.color);
+                            
+                            if (meteor.health <= 0) {
+                                if (meteor.effect === 'explosive') {
+                                    createExplosion(meteor.x, meteor.y, meteor.size * 3, '#ff4500');
+                                }
+                                
+                                if (meteor.effect === 'split') {
+                                    const childSize = meteor.size * 0.55;
+                                    [-1, 1].forEach(dir => {
+                                        meteors.push({
+                                            x: meteor.x + dir * (meteor.size * 0.5),
+                                            y: meteor.y,
+                                            size: childSize,
+                                            speed: meteor.speed + 1,
+                                            health: 1,
+                                            color: meteor.color,
+                                            type: 'SPLIT_CHILD',
+                                            points: Math.max(5, Math.floor(meteor.points / 2)),
+                                            effect: null,
+                                            invisible: false
+                                        });
+                                    });
+                                }
+                                
+                                const scoreMult = powerUps.doubleScore.active ? 2 : 1;
+                                meteors.splice(index, 1);
+                                score += meteor.points * scoreMult;
+                                meteorsDestroyed++;
+                                addGold(Math.floor(meteor.points / 5) * scoreMult);
+                                drawScore();
+                                drawGold();
+
+                                if (meteorsDestroyed % 10 === 0) {
+                                    addDiamonds(5);
+                                    createExplosion(ship.x, ship.y - 50, 25, '#fff59d');
+                                }
+
+                                saveGameData();
+                                
+                                if (meteorsDestroyed % 12 === 0 && !bossActive) {
+                                    boss = createBoss();
+                                }
+
+                                meteorGone = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if (bossActive) {
+                boss.x += Math.sin(Date.now() / 1000) * boss.speed * timeScale;
+                
+                if (Date.now() - boss.lastAttack > boss.attackCooldown * timeScale) {
+                    boss.lastAttack = Date.now();
+                    
+                    if (boss.attackPattern === 'fire') {
+                        bullets.push({x: boss.x, y: boss.y + 40, vx: 0, vy: 6, color: '#ff4500', damage: 20});
+                    } else if (boss.attackPattern === 'shadow') {
+                        bullets.push({x: boss.x - 20, y: boss.y + 40, vx: -1, vy: 5, color: '#cc9900', damage: 15});
+                        bullets.push({x: boss.x + 20, y: boss.y + 40, vx: 1, vy: 5, color: '#cc9900', damage: 15});
+                    } else {
+                        for (let i = 0; i < 3; i++) {
+                            bullets.push({
+                                x: boss.x - 30 + i * 30, 
+                                y: boss.y + 40, 
+                                vx: (i - 1) * 0.5, 
+                                vy: 6, 
+                                color: '#ffcc00', 
+                                damage: 10
+                            });
+                        }
+                    }
+                }
+                
+                for (let bIndex = bullets.length - 1; bIndex >= 0; bIndex--) {
+                    const bullet = bullets[bIndex];
+                    if (bullet.vy < 0 && Math.abs(boss.x - bullet.x) < boss.width/2 && 
+                        Math.abs(boss.y - bullet.y) < boss.height/2) {
+                        
+                        bossHealth -= (bullet.damage || 10);
+                        bullets.splice(bIndex, 1);
+                        createExplosion(bullet.x, bullet.y, 20, boss.color);
+                        updateBossHealthBar();
+                        
+                        if (bossHealth <= 0) {
+                            bossActive = false;
+                            bossHealthBar.style.display = 'none';
+                            bossName.style.display = 'none';
+                            createExplosion(boss.x, boss.y, 100, boss.color);
+                            const bossScoreMult = powerUps.doubleScore.active ? 2 : 1;
+                            score += 500 * bossScoreMult;
+                            addGold(50 * bossScoreMult);
+                            drawScore();
+                            drawGold();
+                            saveGameData();
+                        }
+                    } else if (bullet.vy > 0 && Math.abs(ship.x - bullet.x) < ship.width/2 && Math.abs(ship.y - bullet.y) < ship.height/2) {
+                        if (powerUps.invincible.active) {
+                            createExplosion(bullet.x, bullet.y, 20, '#ffff00');
+                        } else if (ship.shield) {
+                            ship.shield = false;
+                            createExplosion(bullet.x, bullet.y, 20, '#e6d38a');
+                        } else {
+                            lives--;
+                            drawLives();
+                            createExplosion(ship.x, ship.y, 30, '#ffcc00');
+                            if (lives <= 0) {
+                                endGame();
+                            }
+                        }
+                        bullets.splice(bIndex, 1);
+                    }
+                }
+            }
+            
+            for (let index = powerUpItems.length - 1; index >= 0; index--) {
+                const powerUp = powerUpItems[index];
+                const dx = ship.x - powerUp.x;
+                const dy = ship.y - powerUp.y;
+                const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+
+                if (buddy.active) {
+                    const pullSpeed = 8;
+                    powerUp.x += (dx / dist) * pullSpeed * timeScale;
+                    powerUp.y += (dy / dist) * pullSpeed * timeScale;
+                } else {
+                    powerUp.y += powerUp.speed * timeScale;
+                }
+                
+                if (Math.abs(powerUp.x - ship.x) < powerUp.width + ship.width/2 && 
+                    Math.abs(powerUp.y - ship.y) < powerUp.height + ship.height/2) {
+                    
+                    activatePowerUp(powerUp.type);
+                    powerUpItems.splice(index, 1);
+                    createExplosion(powerUp.x, powerUp.y, 20, powerUp.color);
+                    continue;
+                }
+                
+                if (powerUp.y > canvas.height) {
+                    powerUpItems.splice(index, 1);
+                }
+            }
+            
+            updatePowerUpDurations();
+            
+            const settings = gameModeSettings[gameMode];
+            if (Math.random() < settings.spawnRate * timeScale) {
+                meteors.push(createMeteor());
+            }
+            
+            const luckyMult = shipUpgrades.luckyStar.unlocked ? 1.5 : 1;
+            if (Math.random() < settings.powerUpRate * luckyMult * timeScale) {
+                powerUpItems.push(createPowerUp());
+            }
+            
+            for (let index = bullets.length - 1; index >= 0; index--) {
+                const bullet = bullets[index];
+                bullet.y += bullet.vy * timeScale;
+                bullet.x += bullet.vx * timeScale;
+                if (bullet.y < 0 || bullet.y > canvas.height || bullet.x < 0 || bullet.x > canvas.width) {
+                    bullets.splice(index, 1);
+                }
+            }
+        }
+
+        function activatePowerUp(type) {
+            powerUps[type].active = true;
+            powerUps[type].duration = powerUps[type].maxDuration;
+            
+            if (!activePowerUps.includes(type)) {
+                activePowerUps.push(type);
+            }
+            
+            if (type === 'shield') {
+                ship.shield = true;
+            }
+            
+            drawPowerDisplay();
+        }
+
+        function updatePowerUpDurations() {
+            activePowerUps.forEach((type, index) => {
+                powerUps[type].duration--;
+                
+                if (powerUps[type].duration <= 0) {
+                    powerUps[type].active = false;
+                    activePowerUps.splice(index, 1);
+                    
+                    if (type === 'shield') {
+                        ship.shield = false;
+                    }
+                }
+            });
+            drawPowerDisplay();
+        }
+
+        document.getElementById('startBtn').addEventListener('click', () => {
+            gameActive = true;
+            gamePaused = false;
+            score = 0;
+
+            pauseMenu.style.display = 'none';
+            pauseMenu.classList.remove('pause-menu-show', 'pause-menu-hide');
+            pauseBtn.textContent = '⏸';
+            
+            lives = 3 + (ultimatePass.owned ? ultimatePass.extraLives : 0) + (shipUpgrades.extraArmor.unlocked ? 1 : 0);
+            
+            meteorsDestroyed = 0;
+            bossActive = false;
+            meteors = [];
+            bullets = [];
+            powerUpItems = [];
+            activePowerUps = [];
+            explosions = [];
+            agentBeams = [];
+            buddy.active = false;
+            buddy.duration = 0;
+            
+            createStars();
+            
+            Object.keys(powerUps).forEach(key => {
+                powerUps[key].active = false;
+                powerUps[key].duration = 0;
+            });
+            
+            ship.shield = shipUpgrades.shieldStart.unlocked;
+            menu.style.display = 'none';
+            pauseBtn.style.display = 'block';
+            pauseBtn.textContent = '⏸';
+            updateDevPanelShortcutVisibility();
+            
+            // Agent butonunu göster
+            if (agent.unlocked) {
+                agentBtn.style.display = 'block';
+                if (agent.cooldown <= 0) {
+                    agentBtn.disabled = false;
+                    agentBtn.classList.add('ready');
+                } else {
+                    agentBtn.disabled = true;
+                    agentCooldown.style.display = 'block';
+                }
+            }
+
+            // Buddy butonunu göster
+            if (buddy.unlocked) {
+                buddyBtn.style.display = 'block';
+                if (buddy.cooldown <= 0) {
+                    buddyBtn.disabled = false;
+                    buddyBtn.classList.add('ready');
+                } else {
+                    buddyBtn.disabled = true;
+                    buddyCooldown.style.display = 'block';
+                }
+            }
+            
+            ship.x = canvas.width / 2;
+            
+            const settings = gameModeSettings[gameMode];
+            ship.speed = settings.playerSpeed;
+            
+            updateUI();
+        });
+
+        pauseBtn.addEventListener('click', togglePause);
+        resumeBtn.addEventListener('click', togglePause);
+        homeBtnPause.addEventListener('click', goToMainMenuFromPause);
+
+        // ===== GİZLİ GELİŞTİRİCİ PANELİ =====
+        const DEV_PANEL_PASSWORD = "umstudios!";
+        let devClickCount = 0;
+        let devClickResetTimer = null;
+        const devPanelTrigger = document.getElementById('devPanelTrigger');
+        const devPasswordOverlay = document.getElementById('devPasswordOverlay');
+        const devPasswordInput = document.getElementById('devPasswordInput');
+        const devPasswordError = document.getElementById('devPasswordError');
+        const devPasswordSubmit = document.getElementById('devPasswordSubmit');
+        const devPasswordCancel = document.getElementById('devPasswordCancel');
+        const devPanelOverlay = document.getElementById('devPanelOverlay');
+        const devPanelClose = document.getElementById('devPanelClose');
+        const devPanelShortcut = document.getElementById('devPanelShortcut');
+
+        function updateDevPanelShortcutVisibility() {
+            const discovered = localStorage.getItem('devPanelDiscovered') === 'true';
+            devPanelShortcut.style.display = (discovered && menu.style.display !== 'none') ? 'flex' : 'none';
+        }
+
+        if (localStorage.getItem('devPanelDiscovered') === 'true') {
+            updateDevPanelShortcutVisibility();
+        }
+
+        function openDevPasswordPrompt() {
+            devPasswordInput.value = '';
+            devPasswordError.textContent = '';
+            devPasswordOverlay.classList.add('show');
+            devPasswordInput.focus();
+        }
+
+        function closeDevPasswordPrompt() {
+            devPasswordOverlay.classList.remove('show');
+        }
+
+        function checkDevPassword() {
+            if (devPasswordInput.value === DEV_PANEL_PASSWORD) {
+                closeDevPasswordPrompt();
+                devPanelOverlay.classList.add('show');
+                localStorage.setItem('devPanelDiscovered', 'true');
+                updateDevPanelShortcutVisibility();
+            } else {
+                devPasswordError.textContent = 'Yanlış şifre!';
+                devPasswordInput.value = '';
+                devPasswordInput.focus();
+            }
+        }
+
+        devPanelTrigger.addEventListener('click', () => {
+            devClickCount++;
+            clearTimeout(devClickResetTimer);
+            devClickResetTimer = setTimeout(() => { devClickCount = 0; }, 2000);
+            if (devClickCount >= 7) {
+                devClickCount = 0;
+                clearTimeout(devClickResetTimer);
+                openDevPasswordPrompt();
+            }
+        });
+        devPanelShortcut.addEventListener('click', openDevPasswordPrompt);
+        devPasswordSubmit.addEventListener('click', checkDevPassword);
+        devPasswordCancel.addEventListener('click', closeDevPasswordPrompt);
+        devPasswordInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') checkDevPassword();
+        });
+
+        devPanelClose.addEventListener('click', () => {
+            devPanelOverlay.classList.remove('show');
+        });
+
+        document.getElementById('devAddGold').addEventListener('click', () => {
+            gold += 1000;
+            drawGold();
+            saveGameData();
+        });
+
+        document.getElementById('devAddDiamonds').addEventListener('click', () => {
+            diamonds += 1000;
+            saveGameData();
+            updateUI();
+        });
+
+        document.getElementById('devGiveUltimate').addEventListener('click', () => {
+            ultimatePass.owned = true;
+            ultimateBoxes += 10;
+            applyUltimatePassBenefits();
+            drawBoxes();
+            saveGameData();
+            updateUI();
+        });
+
+        document.getElementById('devGiveBox').addEventListener('click', () => {
+            ultimateBoxes += 5;
+            drawBoxes();
+            saveGameData();
+        });
+
+        document.getElementById('openBoxBtn').addEventListener('click', openUltimateBox);
+
+        document.getElementById('devResetSave').addEventListener('click', () => {
+            showConfirm('Tüm kayıtlı ilerleme silinecek. Emin misiniz?', () => {
+                localStorage.clear();
+                location.reload();
+            });
+        });
+
+        loadGameData();
+        setupControls();
+        setupGameModes();
+        setupShop();
+        updateUI();
+        createStars();
+        gameLoop();
+
+        window.buyItem = buyItem;
+        window.equipItem = equipItem;
+        window.buyUniverse = buyUniverse;
+        window.equipUniverse = equipUniverse;
+        window.buyAgent = buyAgent;
+        window.buyBuddy = buyBuddy;
+        window.buyUltimatePass = buyUltimatePass;
+        window.buyShipUpgrade = buyShipUpgrade;
+        window.setDoubleShotMode = setDoubleShotMode;
+    </script>
+</body>
+</html>
+</textarea>
+
+        <div class="btn-group">
+            <a href="#" class="btn btn-download" id="download-btn">
+                KAYNAK KODUNU İNDİR (.HTML)
+            </a>
+            
+            <button class="btn btn-upload" id="upload-btn">
+                PANOYA KOPYALA
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        const sourceTextArea = document.getElementById('source-text');
+        const uploadBtn = document.getElementById('upload-btn');
+        const downloadBtn = document.getElementById('download-btn');
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const textContent = sourceTextArea.value;
+            const blob = new Blob(["\ufeff" + textContent], { type: 'text/html;charset=utf-8' });
+            downloadBtn.href = URL.createObjectURL(blob);
+            downloadBtn.download = 'Ultimate_Meteor_5_Source.html';
+        });
+
+        uploadBtn.addEventListener('click', () => {
+            sourceTextArea.select();
+            sourceTextArea.setSelectionRange(0, 99999);
+
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(sourceTextArea.value).then(basariliEfekti);
+            } else {
+                try {
+                    const basarili = document.execCommand('copy');
+                    if (basarili) basariliEfekti();
+                    else throw new Error();
+                } catch (err) {
+                    alert("Kopyalama başarısız. Lütfen metne basılı tutup manuel kopyalayın.");
+                }
+            }
+        });
+
+        function basariliEfekti() {
+            uploadBtn.textContent = "✓ KOD KOPYALANDI!";
+            uploadBtn.style.background = "linear-gradient(to bottom, #444, #222)";
+            setTimeout(() => {
+                uploadBtn.textContent = "PANOYA KOPYALA";
+                uploadBtn.style.background = "linear-gradient(to bottom, #444, #222)";
+            }, 2000);
+        }
+    </script>
+</body>
+  </html>
